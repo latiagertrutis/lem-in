@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_reader.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/07 21:04:22 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/08 23:10:52 by mrodrigu         ###   ########.fr       */
+/*   Created: 2018/06/08 20:32:11 by mrodrigu          #+#    #+#             */
+/*   Updated: 2018/06/08 23:04:54 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
 
-t_node	*ft_reader(t_data *data)
+int		main(int argc, char **argv)
 {
+	t_data	data;
 
+	data = (t_data){1};
+	if (argc >= 2 && (data.fd = open(argv[1], O_RDONLY)) < 0)
+		return (0);
+	return (0);
 }
