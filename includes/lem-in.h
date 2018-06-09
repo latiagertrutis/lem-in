@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 21:05:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/08 21:28:24 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/09 22:46:04 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct		s_node
 {
 	char			*name;
 	int				id;
-	int				ant : 1;
+	int				ants;
 	int				start : 1;
 	int				end : 1;
 	int				n_links;

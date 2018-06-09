@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 21:04:22 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/08 23:10:52 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/09 22:52:50 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,10 @@
 
 t_node	*ft_reader(t_data *data)
 {
+	char	*line;
 
+	while (get_next_line(data->fd, &line) > 0)
+	{
+
+	}
 }
