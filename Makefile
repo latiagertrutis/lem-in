@@ -6,30 +6,30 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/06/08 19:45:26 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/06/10 03:34:52 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .PHONY : all clean fclean re exe
 
-NAME = 
+NAME = lem-in
 
-CFLAGS = 
+CFLAGS = -Wall -Werror -Wextra
 
-LECTOR_FUNCS = 
-
+LECTOR_FUNCS = main.c \
+			   ft_reader.c
 ALGO_FUNCS =
 
 OBJ_DIR = objects/
 LIBFT_DIR = libft/
-LECTOR_DIR =
+LECTOR_DIR = srcs/
 ALGO_DIR = 
 INCLUDES_DIR = includes/
 GRAPHIC_DIR = srcs/graphics/
 
 LIBFT_NAME = libft.a
 LIBFT_ABREV = ft
-HEADERS = 
+HEADERS = lem-in.h
 
 HEADER_PATH = $(patsubst %.h, $(INCLUDES_DIR)%.h,$(HEADERS))
 LECTOR_OBJ = $(patsubst %.c, $(OBJ_DIR)%.o,$(LECTOR_FUNCS))

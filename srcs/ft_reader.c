@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 21:04:22 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/10 03:12:33 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/10 04:00:52 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,10 @@ t_node			*ft_reader(t_data *data)
 	t_node	*aux;
 
 	if (get_next_line(data->fd, &line) < 0)
-		return (NULL);
+		ft_error("get next lain a fallado primoh");
 	data->n_ants = ft_atoi(line);
 	if (!(node = (t_node *)ft_memalloc(sizeof(t_node))))
-		return(NULL);
+		ft_error(NULL);
 	aux = node;
 	ft_ini_node(data, node, line);
 	ft_set_links(data, line, aux);
