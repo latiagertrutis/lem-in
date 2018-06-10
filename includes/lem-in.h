@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 21:05:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/09 22:46:04 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/10 01:00:28 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include "../libft/includes/libft.h"
 
 typedef struct		s_node
 {
 	char			*name;
-	int				id;
 	int				ants;
 	int				start : 1;
 	int				end : 1;
@@ -31,6 +31,8 @@ typedef struct		s_node
 typedef struct		s_data
 {
 	int				fd;
+	int				n_ants;
+	t_node			*start;
 }					t_data;
 
 #endif
