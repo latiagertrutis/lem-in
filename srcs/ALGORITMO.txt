@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 00:58:02 by mrodrigu          #+#    #+#             */
-     Updated: 2018/06/09 04:31:49 by mrodrigu         ###   ########.fr         
+     Updated: 2018/06/12 04:15:24 by mrodrigu         ###   ########.fr         
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,3 +29,5 @@ opciones x = 5, y = 5 y x = 6, y = 4; son igual de optimas.
 // la finalidad es minimizar la funcion:
 // Σ|A_i - A_j| i = 0 ... M , j = 0 ... M , i != j
 // para ello haremos un while que recorra todas las posibilidades y se quede con la menor (fuerza bruta alla vamos)
+
+grafo interesante http://tinyurl.com/y8dwtghw
