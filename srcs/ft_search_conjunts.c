@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/12 01:32:51 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/13 04:07:31 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/13 08:00:49 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "lem-in.h"
@@ -73,7 +73,6 @@ t_path		**ft_search_path(t_node graf, int cuant)
 	int		i;
 	int		j;
 	t_path	**path;
-	t_path	*head;
 
 	path = (path **)ft_malloc(sizeof(path *) * cuant);
 	i = 0;
