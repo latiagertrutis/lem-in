@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/12 01:32:51 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/12 08:20:53 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/13 04:07:31 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "lem-in.h"
@@ -32,11 +32,10 @@ static int	end_prox(t_node node, t_path *prev)
 	return (i);
 }
 
-int		ft_search_path(t_node graf)
+int		ft_make_path(t_node graf, t_path *path)
 {
+	t_path *head;
 	int		i;
-	t_path	*path;
-	t_path	*head;
 
 	path = ft_new_node(NULL, &graf);
 	head = path;
@@ -54,10 +53,38 @@ int		ft_search_path(t_node graf)
 		}
 		else
 		{
+			if (graf.start)
+			{
+				free(head);
+				return (0);
+			}
 			graf = path->prev->node;
 			path = path->prev;
 			ft_strdel(&(path->next));
 		}
 	}
-	return (head);
+	return (1);
+}
+
+int			ft_repair_way(t_node graf, t_path *path)
+
+t_path		**ft_search_path(t_node graf, int cuant)
+{
+	int		i;
+	int		j;
+	t_path	**path;
+	t_path	*head;
+
+	path = (path **)ft_malloc(sizeof(path *) * cuant);
+	i = 0;
+	j = 0;
+	while (j < cuant)
+	{
+
+		if (!(ft_make_way(graf, path[j])))
+			ft_repair_way(graf, path[j - 1]);
+		else
+			j++;
+	}
+	return (path);
 }
