@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 21:05:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/10 03:17:47 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/15 06:00:37 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,15 @@ typedef struct		s_node
 	int				end : 1;
 	int				n_links;
 	struct s_node	*links;
-}					t_node;
+}									t_node;
 
 typedef struct		s_data
 {
 	int				fd;
 	int				n_ants;
 	t_node			*start;
-}					t_data;
+}									t_data;
+
+t_node			*ft_reader(t_data *data);
 
 #endif
