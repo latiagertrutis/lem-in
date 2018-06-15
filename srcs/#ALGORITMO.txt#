@@ -27,7 +27,7 @@ opciones x = 5, y = 5 y x = 6, y = 4; son igual de optimas.
 // cada A_i = x_i + n_i - 1 con x_1 + ... + x_M = h
 // A_i designa los turnos que necesita el camino i con n_i nodos para llevar x_i hormigas
 // la finalidad es minimizar la funcion:
-// Σ|A_i - A_j| i = 0 ... M , j = 0 ... M , i != j
+// Î£|A_i - A_j| i = 0 ... M , j = 0 ... M , i != j
 // para ello haremos un while que recorra todas las posibilidades y se quede con la menor (fuerza bruta alla vamos)
 
 grafo interesante http://tinyurl.com/y8dwtghw
