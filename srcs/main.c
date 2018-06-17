@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/08 20:32:11 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/17 10:07:00 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/17 10:17:35 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ int		main(int argc, char **argv)
 	if (argc >= 2 && (data.fd = open(argv[1], O_RDONLY)) < 0)
 		return (0);
 	node = ft_reader(&data);
-	ft_putstr(data.start->name);
+	while (node->name)
+	{
+		ft_putstr(node->name);
+		ft_putstr("\n");
+		node = node->links;
+	}
 	return (0);
 }
