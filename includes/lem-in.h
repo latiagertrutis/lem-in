@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 21:05:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/15 07:20:32 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/17 08:12:37 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct		s_node
 	int				ants;
 	int				start : 1;
 	int				end : 1;
-	int				ihbt : 1;
+	int				ihbt;
 	int				n_links;
 	struct s_node	*links;
 }									t_node;
@@ -33,9 +33,18 @@ typedef struct		s_node
 typedef struct		s_path
 {
 	t_node			*node;
-	t_path			*next;
-	t_path			*prev;
-}
+	struct s_path	*next;
+	struct s_path	*prev;
+}					t_path;
+
+typedef struct		s_map
+{
+	t_path			*path;
+	int				*paz;
+	int				len;
+	struct s_map	*next;
+	struct s_map	*prev;
+}					t_map;
 
 typedef struct		s_data
 {
