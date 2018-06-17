@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 21:04:22 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/17 10:06:19 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/17 10:18:46 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,7 @@ static void 	check_conexions(t_node *node, t_data *data)
 	i = 0;
 	while (i++ < data->n_nodes)
 	{
+		node->ihbt = node->n_links;
 		if (!node->n_links)
 			ft_error("Node is not connected");
 		if (node->start && !data->start)
