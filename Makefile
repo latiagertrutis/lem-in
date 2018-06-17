@@ -6,7 +6,7 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/06/15 04:32:27 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/06/17 08:49:45 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,11 @@
 
 NAME = lem-in
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS =
 
 LECTOR_FUNCS = main.c \
-							 ft_reader.c
+							 ft_reader.c\
+							 ft_line_error.c
 ALGO_FUNCS =
 
 OBJ_DIR = objects/

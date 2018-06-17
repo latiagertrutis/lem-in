@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 21:05:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/16 07:35:52 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/17 09:26:37 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,14 @@ typedef struct		s_data
 {
 	int				fd;
 	int				n_ants;
-	t_node		*start;
-	t_error		errors;
+	int				current_line;
+	int				n_nodes;
+	t_node			*start;
+	t_node			*end;
+	t_error			errors;
 }									t_data;
 
 t_node			*ft_reader(t_data *data);
+void				ft_line_error(int n, char *err);
 
 #endif
