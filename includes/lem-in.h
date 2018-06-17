@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 21:05:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/17 08:12:37 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/17 09:58:58 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ typedef struct		s_node
 	struct s_node	*links;
 }									t_node;
 
+typedef struct		s_errors
+{
+	unsigned int	start : 1;
+	unsigned int	end : 1;
+}									t_error;
+
 typedef struct		s_path
 {
 	t_node			*node;
@@ -50,7 +56,8 @@ typedef struct		s_data
 {
 	int				fd;
 	int				n_ants;
-	t_node			*start;
+	t_node		*start;
+	t_error		errors;
 }									t_data;
 
 t_node			*ft_reader(t_data *data);
