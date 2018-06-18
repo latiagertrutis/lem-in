@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 08:18:55 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/18 13:01:24 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/18 13:30:01 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "lem-in.h"
@@ -40,7 +40,7 @@ static int		check_useless_nodes(t_node *graf)
 
 	tmp = graf->links[0];
 	tmp2 = graf->links[1];
-//	ft_printf("El nodo %s esta unido con %s y %s \n", graf->name, tmp->name, tmp2->name);
+	ft_printf("El nodo %s esta unido con %s y %s \n", graf->name, tmp->name, tmp2->name);
 	if (tmp->start || tmp->end || tmp2->start || tmp2->end)
 		return (0);
 	i = 0;
@@ -51,13 +51,27 @@ static int		check_useless_nodes(t_node *graf)
 		j = 0;
 		while (j < tmp2->n_links && tmp->links[i]->id != tmp2->id)
 		{
+			ft_printf("comprobando enlace de %s a %s y de %s a %s\n", tmp->name, tmp->links[i]->name, tmp2->name, tmp2->links[j]->name);
 			if (tmp->links[i]->id == tmp2->links[j]->id && tmp->links[i]->id
 			    != graf->id && tmp->links[i]->n_links == 2 &&
 			    tmp2->links[j]->id != tmp->id)
 			{
+				//	exit(1);
 				tmp->links[i]->n_links = 0;
-				tmp->links[i] = tmp2->links[j];
-				tmp2->links[j] = tmp->links[i];
+				while (i + 1 < tmp->n_links)
+				{
+					tmp->links[i] = tmp->links[i + 1];
+					i++;
+				}
+				tmp->links[i] = NULL;
+				tmp->n_links--;
+				while (j + 1 < tmp2->n_links)
+				{
+					tmp2->links[j] = tmp2->links[j + 1];
+					j++;
+				}
+				tmp2->links[j] = NULL;
+				tmp2->n_links--;
 				return (1);
 			}
 			j++;
@@ -73,15 +87,14 @@ void	ft_depure_graf(t_node *graf)
 
 	head = graf;
 //	ft_putnbr(graf->n_links);
-	while (graf->name)
+	while (graf)
 	{
 		if (!(graf->start) && !(graf->end) && graf->n_links == 2)
 		{
 			if (check_useless_nodes(graf))
 				graf = head;
 		}
-		else
-			graf = graf->next;
+		graf = graf->next;
 	}
 	graf = head;
 	return ;

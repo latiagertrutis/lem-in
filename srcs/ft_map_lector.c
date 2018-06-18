@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/17 08:12:53 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/18 12:52:04 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/18 13:21:22 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ void	ft_map_lector(t_map *map, int mode, t_node *graf)
 	}
 	else
 	{
-		while (graf->name)
+		while (graf)
 		{
-			i = 1;
+			i = 0;
 			ft_putstr(graf->name);
 			ft_putstr(": ");
-			while (i <= graf->n_links)
+			while (i < graf->n_links)
 			{
 				ft_putstr((graf->links[i++])->name);
 				ft_putstr(", ");
