@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/17 08:12:53 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/17 10:55:02 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/18 12:52:04 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ void	ft_map_lector(t_map *map, int mode, t_node *graf)
 			ft_putstr(": ");
 			while (i <= graf->n_links)
 			{
-				ft_putstr((graf->links[i++]).name);
+				ft_putstr((graf->links[i++])->name);
 				ft_putstr(", ");
 			}
 				ft_putstr("\n");
-				graf = graf->links;
+				graf = graf->next;
 		}
 	}
 	return ;
