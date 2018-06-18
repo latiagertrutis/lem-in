@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 21:05:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/17 10:30:05 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/18 12:08:10 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <fcntl.h>
 # include "../libft/includes/libft.h"
 
+#define LINK_BUFF 10
+
 typedef struct		s_node
 {
 	char			*name;
@@ -27,7 +29,8 @@ typedef struct		s_node
 	int				end : 1;
 	int				ihbt;
 	int				n_links;
-	struct s_node	*links;
+	struct s_node	**links;
+	struct s_node	*next;
 }									t_node;
 
 typedef struct		s_errors

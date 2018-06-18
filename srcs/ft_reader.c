@@ -6,66 +6,58 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 21:04:22 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/18 11:11:08 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/18 12:37:42 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
 
-static	t_node	*search_node(t_node *n, char *line, t_data *data)
+static	t_node	*search_node(t_node *head, char *line, t_data *data)
 {
 	int i;
 
 	i = 0;
-	while (n && (i = ft_strcmp(n->name, line)))
-		n = n->links;
+	while (head && (i = ft_strcmp(head->name, line)))
+		head = head->next;
 	if (i)
 		ft_line_error(data->current_line, "Some name in links is wrong");
-	return (n);
+	return (head);
 }
 
-static void resize_links(t_node *n, t_node new_node)
+static void resize_links(t_node *n)
 {
+	t_node	**aux;
 	int 	i;
-	t_node *link_arr;
 
 	i = 0;
-	if (!(link_arr = (t_node *)ft_memalloc(sizeof(t_node) * (n->n_links + 2))))
+	if (!(aux = (t_node **)malloc(sizeof(t_node *) * (n->n_links / LINK_BUFF))))
 		ft_error(NULL);
-	while (n->links && i < n->n_links + 1)
+	while (i < n->n_links)
 	{
-		link_arr[i] = n->links[i];
+		aux[i] = (n->links)[i];
 		i++;
 	}
-	link_arr[n->n_links + 1] = new_node;
-	//ft_putchar('A');
-	if (n->links)
-	{
-		ft_printf("name = %s\n", n->name);
-		free(n->links);
-	}
-	//ft_putchar('B');	
-	n->links = link_arr;
-	n->n_links++;
+	free(n->links);
+	n->links = aux;
 }
 
-static	void	ft_link(char *s1, char *s2, t_node *n, t_data *data)
+static void		append_link(t_node *a, t_node *b)
+{
+	if (a->n_links >= LINK_BUFF)
+		resize_links(a);
+	(a->links)[a->n_links] = b;
+	a->n_links++;
+}
+
+static	void	ft_link(char *s1, char *s2, t_node *head, t_data *data)
 {
 	t_node	*aux;
 	t_node	*aux2;
 
-	aux = search_node(n, s1, data);
-	aux2 = search_node(n, s2, data);
-	resize_links(aux, *aux2);
-	resize_links(aux2, *aux);
-	if (aux->links->start)
-		data->start = aux->links;
-	else if (aux->links->end)
-		data->end = aux->links;
-	if (aux2->links->start)
-		data->start = aux2->links;
-	else if (aux2->links->end)
-		data->end = aux2->links;
+	aux = search_node(head, s1, data);
+	aux2 = search_node(head, s2, data);
+	append_link(aux, aux2);
+	append_link(aux2, aux);
 }
 
 static int		check_comment_line(t_data *data, char *line, t_node *node)
@@ -111,7 +103,7 @@ static int		check_link_format(char *line)
 	return (0);
 }
 
-static	void	ft_set_links(t_data *data, char *line, t_node *n)
+static	void	ft_set_links(t_data *data, char *line, t_node *head)
 {
 	int i;
 
@@ -129,7 +121,7 @@ static	void	ft_set_links(t_data *data, char *line, t_node *n)
 		line[i - 1] = 0;
 		if (!ft_strcmp(line, line + i))
 			ft_line_error(data->current_line, "Some node is linked with himselve");
-		ft_link(line, line + i, n, data);
+		ft_link(line, line + i, head, data);
 		free(line);
 	next: if (get_next_line(data->fd, &line) <= 0)
 			break ;
@@ -170,7 +162,7 @@ static char		*check_repeated_names(t_node *node, char *line, int current_line)
 	{
 		if (node->name && !ft_strcmp(node->name, line))
 			ft_line_error(current_line, "Some name is repeated");
-		node = node->links;
+		node = node->next;
 	}
 	return (line);
 }
@@ -191,16 +183,16 @@ static char		*ft_ini_node(t_data *data, t_node *node, char *line)
 			ft_line_error(data->current_line, "Wrong node format");
 		if (i >= 0)
 		{
-			if(!(node->links = (t_node *)ft_memalloc(sizeof(t_node))))
+			if(!(node->next = (t_node *)ft_memalloc(sizeof(t_node))) ||
+			   !(node->next->links = (t_node **)ft_memalloc(sizeof(t_node *) * LINK_BUFF)))
 				ft_error(NULL);
-			node = node->links;
+			node = node->next;
 		}
 		i = 0;
 		while (line[i++] != ' ');
 		line[i - 1] = 0;
 		node->name = check_repeated_names(head, line, data->current_line);
 		node->id = data->n_nodes++;
-		node->links = NULL;
 		if (data->errors.start && !data->start)
 		{
 			node->start = 0x1;
@@ -218,7 +210,7 @@ static char		*ft_ini_node(t_data *data, t_node *node, char *line)
 t_node			*ft_reader(t_data *data)
 {
 	char		*line;
-	t_node	*node;
+	t_node		*head;
 	int			i;
 
 	if (get_next_line(data->fd, &line) < 0)
@@ -230,26 +222,12 @@ t_node			*ft_reader(t_data *data)
 			ft_line_error(data->current_line, "First line should only contain numbers");
 	}
 	data->n_ants = ft_atoi(line);
-	if (!(node = (t_node *)ft_memalloc(sizeof(t_node))))
+	if (!(head = (t_node *)ft_memalloc(sizeof(t_node))) ||
+	    !(head->links = (t_node **)ft_memalloc(sizeof(t_node *) * LINK_BUFF)))
 		ft_error(NULL);
-	line = ft_ini_node(data, node, line);
+	line = ft_ini_node(data, head, line);
 	if (!data->start || !data->end)
 		ft_line_error(data->current_line, "No start or end found");
-	ft_set_links(data, line, node);
-	/* t_node *no = node; */
-	/* int c = 0; */
-	/* while (no) */
-	/* { */
-	/* 	ft_putstr(no->name); */
-	/* 	ft_putstr(": "); */
-	/* 	c = 1; */
-	/* 	while (no->links && c <= no->n_links) */
-	/* 	{ */
-	/* 		ft_putstr((no->links)[c++].name); */
-	/* 		ft_putstr(", "); */
-	/* 	} */
-	/* 	ft_putstr("\n"); */
-	/* 	no = no->links; */
-	/* } */
-	return (node);
+	ft_set_links(data, line, head);
+	return (head);
 }
