@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 21:04:22 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/17 10:18:46 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/18 10:15:39 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,14 @@ static	void	ft_link(char *s1, char *s2, t_node *n, t_data *data)
 	aux2 = search_node(n, s2, data);
 	resize_links(aux, *aux2);
 	resize_links(aux2, *aux);
+	if (aux->links->start)
+		data->start = aux->links;
+	else if (aux->links->end)
+		data->end = aux->links;
+	if (aux2->links->start)
+		data->start = aux2->links;
+	else if (aux2->links->end)
+		data->end = aux2->links;
 }
 
 static int		check_comment_line(t_data *data, char *line, t_node *node)
@@ -62,14 +70,12 @@ static int		check_comment_line(t_data *data, char *line, t_node *node)
 		{
 			if (data->errors.start || !node)
 				ft_line_error(data->current_line, "Wrong number or position of ##start");
-			node->start = 0x1;
 			data->errors.start = 0x1;
 		}
 		else if (!ft_strcmp(line, "##end"))
 		{
 			if (data->errors.end || !node)
 				ft_line_error(data->current_line, "Wrong number or position of ##end");
-			node->end = 0x1;
 			data->errors.end = 0x1;
 		}
 		return (1);
@@ -188,34 +194,18 @@ static char		*ft_ini_node(t_data *data, t_node *node, char *line)
 		line[i - 1] = 0;
 		node->name = check_repeated_names(head, line, data->current_line);
 		node->id = data->n_nodes++;
+		if (data->errors.start && !data->start)
+		{
+			node->start = 0x1;
+			data->start = node;
+		}
+		if (data->errors.end && !data->end)
+		{
+			node->end = 0x1;
+			data->end = node;
+		}
 	}
 	return (line);
-}
-
-static void 	check_conexions(t_node *node, t_data *data)
-{
-	int i;
-
-	i = 0;
-	while (i++ < data->n_nodes)
-	{
-		node->ihbt = node->n_links;
-		if (!node->n_links)
-			ft_error("Node is not connected");
-		if (node->start && !data->start)
-		{
-			node->start = 0;
-			node->links->start = 0x1;
-			data->start = node->links;
-		}
-		if (node->end && !data->end)
-		{
-			node->end = 0;
-			node->links->end = 0x1;
-			data->end = node->links;
-		}
-		node = node->links;
-	}
 }
 
 t_node			*ft_reader(t_data *data)
@@ -236,7 +226,7 @@ t_node			*ft_reader(t_data *data)
 	if (!(node = (t_node *)ft_memalloc(sizeof(t_node))))
 		ft_error(NULL);
 	line = ft_ini_node(data, node, line);
-	if (!data->errors.start || !data->errors.end)
+	if (!data->start || !data->end)
 		ft_line_error(data->current_line, "No start or end found");
 	ft_set_links(data, line, node);
 	/* t_node *no = node; */
@@ -254,7 +244,5 @@ t_node			*ft_reader(t_data *data)
 	/* 	ft_putstr("\n"); */
 	/* 	no = no->links; */
 	/* } */
-
-	check_conexions(node, data);
 	return (node);
 }
