@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/08 20:32:11 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/18 10:24:57 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/18 11:13:40 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int		main(int argc, char **argv)
 	node = ft_reader(&data);
 	ft_map_lector(NULL, 0, node);
 	ft_depure_graf(node);
+	ft_printf("MAP DEPURED \n");
 	ft_map_lector(NULL, 0, node);
 //	ft_putstr(data.start->name);
 	return (0);

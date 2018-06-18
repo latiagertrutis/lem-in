@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 21:04:22 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/18 10:15:39 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/18 11:11:08 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,13 @@ static void resize_links(t_node *n, t_node new_node)
 		i++;
 	}
 	link_arr[n->n_links + 1] = new_node;
-	free(n->links);
+	//ft_putchar('A');
+	if (n->links)
+	{
+		ft_printf("name = %s\n", n->name);
+		free(n->links);
+	}
+	//ft_putchar('B');	
 	n->links = link_arr;
 	n->n_links++;
 }
@@ -194,6 +200,7 @@ static char		*ft_ini_node(t_data *data, t_node *node, char *line)
 		line[i - 1] = 0;
 		node->name = check_repeated_names(head, line, data->current_line);
 		node->id = data->n_nodes++;
+		node->links = NULL;
 		if (data->errors.start && !data->start)
 		{
 			node->start = 0x1;
