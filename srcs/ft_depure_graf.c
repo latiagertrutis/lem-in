@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 08:18:55 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/17 10:17:05 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/18 09:57:09 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "lem-in.h"
@@ -40,19 +40,23 @@ static void		check_useless_nodes(t_node *graf)
 
 	tmp = graf->links + 1;
 	tmp2 = graf->links + 2;
-	if (tmp->start || tmp->end || tmp2->start || tmp2->end)
-		return ;
+	ft_printf("El nodo %i esta unido con %i y %i \n", graf->id, tmp->id, tmp2->id);
+//	if (tmp->start || tmp->end || tmp2->start || tmp2->end)
+//		return ;
 	i = 1;
-	j = 1;
-	while (i < tmp->n_links)
+//	ft_putchar('B');
+	while (i <= tmp->n_links)
 	{
-		while (j < tmp2->n_links)
+//		ft_putchar('A');
+		j = 1;
+		while (j <= tmp2->n_links)
 		{
 			if (tmp->links[i].id == tmp2->links[j].id && tmp->links[i].id
 			    != graf->id && tmp->links[i].n_links == 2)
 			{
-				graf->n_links = 0;
+				tmp->links[i].n_links = 0;
 				tmp->links[i] = tmp2->links[j];
+				tmp2->links[j] = tmp->links[i];
 				return ;
 			}
 			j++;
@@ -66,6 +70,7 @@ void	ft_depure_graf(t_node *graf)
 	t_node *head;
 
 	head = graf;
+//	ft_putnbr(graf->n_links);
 	while (graf->name)
 	{
 		if (!graf->start && !graf->end && graf->n_links == 2)
@@ -77,6 +82,7 @@ void	ft_depure_graf(t_node *graf)
 			graf = graf->links;
 	}
 	graf = head;
+	return ;
 	while (graf->name)
 	{
 		if (!graf->start && !graf->end && graf->n_links == 1)
