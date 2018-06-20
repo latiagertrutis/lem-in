@@ -6,7 +6,7 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/06/18 13:02:49 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/06/20 01:13:06 by jagarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,13 +14,14 @@
 
 NAME = lem-in
 
-CFLAGS =
+CFLAGS = -fsanitize=address
 
 LECTOR_FUNCS =	main.c \
 				ft_reader.c\
 				ft_line_error.c \
 				ft_map_lector.c \
-				ft_depure_graf.c
+				ft_depure_graf.c \
+				ft_search_paths.c
 ALGO_FUNCS =
 
 OBJ_DIR = objects/

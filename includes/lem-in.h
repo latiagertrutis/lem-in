@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 21:05:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/18 12:08:10 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/18 21:19:13 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct		s_path
 typedef struct		s_map
 {
 	t_path			*path;
-	int				*paz;
+	t_path			*head;
 	int				len;
 	struct s_map	*next;
 	struct s_map	*prev;
@@ -69,7 +69,7 @@ typedef struct		s_data
 t_node			*ft_reader(t_data *data);
 void				ft_line_error(int n, char *err);
 void			ft_depure_graf(t_node *graf);
-//t_map			*ft_search_paths(t_node *graf);
-void			ft_map_lector(t_map *map, int mode, t_node *graf);
+t_map			*ft_search_paths(t_node *graf);
+void			ft_map_lector(t_map *map, t_node *graf);
 
 #endif

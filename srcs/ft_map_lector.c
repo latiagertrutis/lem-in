@@ -6,47 +6,52 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/17 08:12:53 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/18 13:21:22 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/20 02:06:53 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
 
-void	ft_map_lector(t_map *map, int mode, t_node *graf)
+static void	path_lector(t_path *path)
+{	
+	while(path)
+	{
+		ft_printf("%s - ", path->node->name);
+		path = path->next;
+	}
+}
+
+void	ft_map_lector(t_map *map, t_node *graf)
 {
 	int		i;
-
+	
 	i = 1;
 
-	if (mode)
+	
+	if (map)
 	{
 		while (map)
 		{
-//			ft_printf("Path %i:\n", i);
-			while(map->path)
-			{
-//				ft_printf("%s - ", map->path->node->name);
-				map->path = map->path->next;
-			}
+			ft_printf("Path %i:\n", i);
+			path_lector(map->head);
 			i++;
 			map = map->next;
 			ft_putchar('\n');
 		}
+		
 	}
 	else
 	{
 		while (graf)
 		{
 			i = 0;
-			ft_putstr(graf->name);
-			ft_putstr(": ");
+			if (graf->n_links)
+				ft_printf("%s: ",graf->name);
 			while (i < graf->n_links)
-			{
-				ft_putstr((graf->links[i++])->name);
-				ft_putstr(", ");
-			}
+				ft_printf("%s, ",graf->links[i++]->name);
+			if (graf->n_links)
 				ft_putstr("\n");
-				graf = graf->next;
+			graf = graf->next;
 		}
 	}
 	return ;
