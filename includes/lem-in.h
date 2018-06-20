@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 21:05:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/18 12:08:10 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/18 20:02:50 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include </Users/mrodrigu/.brew/include/SDL2/SDL.h>
+# include </Users/mrodrigu/.brew/include/SDL2/SDL_image.h>
 # include "../libft/includes/libft.h"
 
 #define LINK_BUFF 10
@@ -54,6 +56,12 @@ typedef struct		s_map
 	struct s_map	*next;
 	struct s_map	*prev;
 }					t_map;
+
+typedef struct		s_conj
+{
+	int				cuant;
+	t_map			**path;
+}					t_conj;
 
 typedef struct		s_data
 {
