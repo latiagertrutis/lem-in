@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 21:05:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/20 10:27:49 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/20 12:55:55 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include </Users/mrodrigu/.brew/include/SDL2/SDL_image.h>
 # include "../libft/includes/libft.h"
 
-#define LINK_BUFF 10
+#define LINK_BUFF 50
 
 typedef struct		s_node
 {
@@ -75,9 +75,13 @@ typedef struct		s_data
 }									t_data;
 
 t_node			*ft_reader(t_data *data);
-void				ft_line_error(int n, char *err);
+void			ft_line_error(int n, char *err);
 void			ft_depure_graf(t_node *graf);
 t_map			*ft_search_paths(t_node *graf);
 void			ft_map_lector(t_map *map, t_node *graf);
+void			ft_check_number_of_ants(t_data *data, char **line);
+int				check_comment_line(t_data *data, char *line, t_node *node);
+char			*ft_ini_node(t_data *data, t_node *node, char *line);
+void			ft_set_links(t_data *data, char *line, t_node *head);
 
 #endif

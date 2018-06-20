@@ -6,7 +6,7 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/06/20 10:27:37 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/06/20 12:56:06 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,11 @@ LECTOR_FUNCS =	main.c \
 				ft_line_error.c \
 				ft_map_lector.c \
 				ft_depure_graf.c \
-				ft_search_paths.c
+				ft_search_paths.c \
+				ft_check_number_of_ants.c \
+				check_comment_line.c \
+				ft_ini_node.c \
+				ft_set_links.c
 ALGO_FUNCS =
 
 OBJ_DIR = objects/
