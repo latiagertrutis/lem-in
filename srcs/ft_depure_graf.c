@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 08:18:55 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/20 06:58:24 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/20 17:11:47 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "lem-in.h"
@@ -93,6 +93,16 @@ void	ft_depure_graf(t_node *graf)
 		{
 			kill_branch(graf);
 			graf = head;
+		}
+		graf = graf->next;
+	}
+	graf = head;
+	while (graf)
+	{
+		if (!(graf->start) && !(graf->end) && graf->n_links == 2)
+		{
+			if (check_useless_nodes(graf))
+				graf = head;
 		}
 		graf = graf->next;
 	}

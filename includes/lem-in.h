@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 21:05:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/20 12:55:55 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/20 16:11:37 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include </Users/mrodrigu/.brew/include/SDL2/SDL.h>
-# include </Users/mrodrigu/.brew/include/SDL2/SDL_image.h>
+//# include </Users/mrodrigu/.brew/include/SDL2/SDL.h>
+//# include </Users/mrodrigu/.brew/include/SDL2/SDL_image.h>
 # include "../libft/includes/libft.h"
 
 #define LINK_BUFF 50

@@ -6,7 +6,7 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/06/20 12:56:06 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/06/20 16:12:24 by jagarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 NAME = lem-in
 
-CFLAGS = -I/Users/mrodrigu/.brew/include/SDL2 -D_THREAD_SAFE -L/Users/mrodrigu/.brew/lib -lSDL2 -lSDL2_image -lm
+CFLAGS = -fsanitize=address
 
 LECTOR_FUNCS =	main.c \
 				ft_reader.c\
