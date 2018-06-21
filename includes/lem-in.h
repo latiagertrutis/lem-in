@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 21:05:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/20 16:11:37 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/21 17:45:44 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,6 @@ typedef struct		s_map
 	struct s_map	*next;
 	struct s_map	*prev;
 }					t_map;
-
-typedef struct		s_conj
-{
-	int				cuant;
-	t_map			**path;
-}					t_conj;
 
 typedef struct		s_data
 {
