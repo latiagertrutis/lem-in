@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/17 04:12:39 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/20 18:13:23 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/22 11:14:20 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,15 @@ t_path	*ft_new_path(t_node *node, t_path *prev, int *len)
 	return (path);
 }
 
+static void	path_lector(t_path *path)
+{	
+	while(path)
+	{
+		ft_printf("%s - ", path->node->name);
+		path = path->next;
+	}
+}
+
 static int	check_paths(t_map **map, int pos)
 {
 
@@ -35,8 +44,11 @@ static int	check_paths(t_map **map, int pos)
 	{
 		while ((*map)->path->node->end)
 		{
-			ft_printf("El path %i esta completo\n",pos);
-			(*map)->path = (*map)->head;			
+//			ft_printf("El path %i esta completo\n",pos);
+			(*map)->path = (*map)->head;
+//			ft_printf("Path %i", pos);
+//			path_lector((*map)->path);
+//			ft_putchar('\n');
 			if (!(*map)->next)
 				return (-1);
 			(*map) = (*map)->next;
@@ -95,8 +107,7 @@ static void	copy_paths(t_map *map, int pos, int *len, t_map **end_map)
 			i++;
 		if (i > n_links - 1)
 			break ;
-		while(map->path->prev)
-			map->path = map->path->prev;
+		map->path = map->head;
 		tmp_map->next = ft_new_map(ft_new_path(map->path->node, NULL, 0), tmp_map);
 		tmp_map = tmp_map->next;
 		while (map->path->next)
@@ -182,17 +193,17 @@ t_map	*ft_search_paths(t_node *graf)
 	{
 		if (tmp_map->len < 0)
 		{
-			ft_printf("DELETING\n");
-			ft_printf("Estoy en el nodo %s y la longitud del path por ahora es %i\n", tmp_map->path->node->name, tmp_map->len);
+//			ft_printf("DELETING\n");
+//			ft_printf("Estoy en el nodo %s y la longitud del path por ahora es %i\n", tmp_map->path->node->name, tmp_map->len);
 			pos = destroy_path(&tmp_map, pos, &head_map);
-			ft_printf("DELETED\n");
+//			ft_printf("DELETED\n");
 		}
 		else
 		{
-			ft_printf("COPYING\n");
-			ft_printf("Estoy en el nodo %s que tiene %i links\n", tmp_map->path->node->name, tmp_map->path->node->n_links);
+//			ft_printf("COPYING\n");
+//			ft_printf("Estoy en el nodo %s que tiene %i links\n", tmp_map->path->node->name, tmp_map->path->node->n_links);
 			copy_paths(tmp_map, pos, &(tmp_map->len), &(end_map));
-			ft_printf("COPIED\n");
+//			ft_printf("COPIED\n");
 //			ft_printf("Ahora estoy en el nodo %s\n", tmp_map->path->node->name);
 		}
 //		ft_map_lector(head_map, NULL);
