@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 21:05:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/21 17:45:44 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/22 14:50:55 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "../libft/includes/libft.h"
 
 #define LINK_BUFF 50
+#define SET_BUFF 50
 
 typedef struct		s_node
 {
@@ -46,7 +47,7 @@ typedef struct		s_path
 	t_node			*node;
 	struct s_path	*next;
 	struct s_path	*prev;
-}					t_path;
+}									t_path;
 
 typedef struct		s_map
 {
