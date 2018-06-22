@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/17 08:12:53 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/20 02:06:53 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/22 17:27:05 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ void	ft_map_lector(t_map *map, t_node *graf)
 	
 	if (map)
 	{
-		while (map)
+		while (map->path)
 		{
 			ft_printf("Path %i:\n", i);
-			path_lector(map->head);
+			path_lector(map->path);
 			i++;
-			map = map->next;
+			map++;
 			ft_putchar('\n');
 		}
 		
