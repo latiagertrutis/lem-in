@@ -6,13 +6,13 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 18:35:46 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/23 18:20:55 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/23 18:35:05 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
 
-static void		prepare_graf(t_node *node, t_map *conj, int cuant)
+static void		prepare_graf(t_node *node, t_path *conj, int mode)
 {
 	t_path	*tmp;
 
@@ -104,7 +104,7 @@ t_map	**ft_algorithm(t_data *data, t_node *node)
 		}
 		else
 		{
-			prepare_graf(node, conj[max - j][--cuant[i]], 1);
+			prepare_graf(node, conj[max - j][--cuant[i]].path, 1);
 			i++;
 			j++;
 		}
