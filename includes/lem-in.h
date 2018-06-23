@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 21:05:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/22 18:05:27 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/23 14:18:52 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ typedef struct		s_path
 typedef struct		s_map
 {
 	t_path			*path;
-	int				*path2;
 	t_path			*head;
+	t_path			*tail;
 	int				len;
 	struct s_map	*next;
 	struct s_map	*prev;
@@ -71,11 +71,12 @@ t_node			*ft_reader(t_data *data);
 void			ft_line_error(int n, char *err);
 void			ft_depure_graf(t_node *graf);
 t_map			*ft_search_paths(t_node *graf);
-t_map			*ft_search_paths2(t_data *data);
+t_map			*ft_search_paths2(t_node *start, int *end, int max);
 void			ft_map_lector(t_map *map, t_node *graf);
 void			ft_check_number_of_ants(t_data *data, char **line);
 int				check_comment_line(t_data *data, char *line, t_node *node);
 char			*ft_ini_node(t_data *data, t_node *node, char *line);
 void			ft_set_links(t_data *data, char *line, t_node *head);
+t_map			**ft_algorithm(t_data *data, t_node *node);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/08 20:32:11 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/22 15:23:27 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/23 11:58:28 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		main(int argc, char **argv)
 {
 	t_data	data;
 	t_node	*node;
-	t_map	*paths;
+	t_map	**paths;
 
 	data = (t_data){0, 0, 1, 0, NULL, NULL, (t_error){0, 0}};
 	if (argc >= 2 && (data.fd = open(argv[1], O_RDONLY)) < 0)
@@ -38,9 +38,15 @@ int		main(int argc, char **argv)
 	ft_depure_graf(node);
 	ft_printf("MAP DEPURED \n");
 	ft_map_lector(NULL, node);
-	paths = ft_search_paths2(&data);
-	ft_printf("PATHS GENERATE \n");
-	ft_map_lector(paths, NULL);
+	paths = ft_algorithm(&data, node);
+//	paths = ft_search_paths2(&data);
+//	ft_printf("PATHS GENERATE \n");
+	i = 0;
+	while (paths[i])
+	{
+		ft_map_lector(paths[i], NULL);
+		i++;
+	}
 //	ft_putstr(data.start->name);
 	return (0);
 }
