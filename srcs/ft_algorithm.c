@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 18:35:46 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/23 14:28:10 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/23 14:34:13 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ static int check_compatible(t_map **conj, int max)
 	while (j < max)
 	{
 		i = j + 1;
-		tmp = conj[j][0].path;
+		tmp = conj[j]->path;
 		while (i < max)
 		{
-			tmp2 = conj[i][0].path;
+			tmp2 = conj[i]->path;
 			while (tmp)
 			{
 				while (tmp2)
