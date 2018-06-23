@@ -6,67 +6,56 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 18:35:46 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/23 19:41:18 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/23 19:35:58 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
 
-static void		prepare_graf(t_node *node, t_path *conj, int mode)
+static int		compare_path(const t_node *node, t_path *path)
 {
-	t_path	*tmp;
+	while (path)
+	{
+		if (path->node == node)
+			return (1);
+		path = path->next;
+	}
+	return (0);
+}
 
-//	while(cuant--)
-//		conj = conj->next;
+static void		prepare_graf(t_node *node, t_path *path, int mode)
+{
 	while (node)
 	{
-		tmp = conj->path;
-		while (tmp)
-		{
-			if (!(node->end) && node->id == tmp->node->id)
-			{
-				node->ihbt = 2;
-				break ;
-			}
-			else
-				tmp = tmp->next;
-		}
-		if (!tmp)
+		if (node->ihbt && !mode && (node->ihbt != 2 || compare_path(node, path)))
+			node->ihbt = 0;
+		else if (mode && node->ihbt != 2 && compare_path(node, path))
+			node->ihbt = 2;
+		else if (node->ihbt != 2)
 			node->ihbt = 0;
 		node = node->next;
 	}
 }
-
-static void	destroy_path(t_map *conj)
+static void	destroy_path(t_map *map, const int n)
 {
-	while (conj)
-	{
-		while (conj->tail)
-		{
-			if (conj->tail->prev)
-			{
-				conj->tail = conj->tail->prev;
-				free(conj->tail->next);
-			}
-			else
-			{
-				free(conj->tail);
-				break ;
-			}
-		}
-		if (conj->next)
-		{
-			conj = conj->next;
-			free(conj->prev);
-		}
-		else
-		{
-			free(conj);
-			break ;
-		}
-	}
-}
+	int		i;
+	t_path	*aux;
 
+	i = 0;
+	while (i < n && map)
+	{
+		map = map->next;
+		i++;
+	}
+	while (map->path)
+	{
+		aux = map->path->next;
+		free(map->path);
+		map->path = aux;
+	}
+	if (!n)
+		free(map);
+}
 t_map	**ft_algorithm(t_data *data, t_node *node)
 {
 	t_map	**conj;
@@ -104,7 +93,7 @@ t_map	**ft_algorithm(t_data *data, t_node *node)
 		}
 		else
 		{
-			prepare_graf(node, conj[max - j][--cuant[i]].path, 1);
+			prepare_graf(node, conj[max - j][--cuant[i]], 1);
 			i++;
 			j++;
 		}
