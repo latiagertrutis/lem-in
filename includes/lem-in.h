@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 21:05:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/25 00:20:17 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/25 00:22:04 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,6 @@ char			*ft_ini_node(t_data *data, t_node *node, char *line);
 void			ft_set_links(t_data *data, char *line, t_node *head);
 t_map			**ft_algorithm(t_data *data, t_node *node);
 double			ft_abs_double(double n);
-void			distribute_ants(double **mat, int row, int col);
+int				distribute_ants(double **mat, int row, int col);
 
 #endif
