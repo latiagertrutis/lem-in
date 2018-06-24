@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 18:35:46 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/23 19:50:36 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/24 20:23:59 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,20 @@ static void	destroy_path(t_map *map, const int n)
 		free(map);
 }
 
+static void	reset_graf(t_node *node, t_node *start, int *cuant)
+{
+	int	i;
+
+	i = 0;
+	while (node)
+	{
+		node->ihbt = 0;
+		node = node->next;
+	}
+	while (i < start->n_links)
+		cuant[i++] = 0;
+}
+
 t_map	**ft_algorithm(t_data *data, t_node *node)
 {
 	t_map	**conj;
@@ -73,18 +87,21 @@ t_map	**ft_algorithm(t_data *data, t_node *node)
 	conj[max] = NULL;
 	tmp = 0;
 	i = 0;
-	j = 1;
-	while (i < data->start->n_links && i >= 0 && (max - j) >= 0)
+	j = max;
+	ft_printf("Debo tener %i conjuntos\n", max);
+	while (i < data->start->n_links && i >= 0 && j > 0)
 	{
 		data->start->ihbt = 1;
 		data->start->links[i]->start = 0x1;
 		if (!(conj[max - j] = ft_search_paths2(data->start->links[i], cuant + i, tmp)))
 		{
+			ft_printf("No he encontrado paths\n");
+			if (!i)
+				ft_error("Start y Exit no unidos\n");
 			i--;
-			j--;
+			ft_error("No paths\n");
 			prepare_graf(node, conj[max - j][cuant[i]].path, 0);
 			destroy_path(conj[max - j], cuant[i]);
-			ft_error("No paths\n");
 		}
 		ft_printf("Tengo %i caminos\n", cuant[i]);
 		data->start->links[i]->start = 0;
@@ -93,12 +110,19 @@ t_map	**ft_algorithm(t_data *data, t_node *node)
 			tmp = conj[max - j]->len;
 			destroy_path(conj[max - j], 0);
 		}
+		else if (conj[max - j] && i + 1 == max - j + 1)
+		{
+			ft_printf("he completado el conjunto %i\n", max - j);
+			reset_graf(node, data->start, cuant);
+			i = 0;
+			j--;
+		}
 		else
 		{
 			prepare_graf(node, conj[max - j][--cuant[i]].path, 1);
 			i++;
-			j++;
+			conj[max - j] = conj[max - j]->next;
 		}
 	}
-return (conj);
+	return (conj);
 }

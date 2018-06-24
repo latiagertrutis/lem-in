@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 11:23:37 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/23 19:44:56 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/24 20:17:21 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ t_map	*ft_search_paths2(t_node *start, int *end, int max)
 		flag = 0;
 		while(++j < bfs[i].node->n_links)
 		{
-			ft_printf("Estoy en %s y esta unido con %s que tiene ihbt=%i\n", bfs[i].node->name, bfs[i].node->links[j]->name,bfs[i].node->links[j]->ihbt );
+			ft_printf("Estoy en %s y esta unido con %s que tiene ihbt=%i\n", bfs[i].node->name, bfs[i].node->links[j]->name,bfs[i].node->links[j]->ihbt);
 			if (!bfs[i].node->links[j]->ihbt)
 			{
 				flag = 1;
@@ -128,4 +128,3 @@ t_map	*ft_search_paths2(t_node *start, int *end, int max)
 	}
 	return (make_path(bfs, *end, len));
 }
-
