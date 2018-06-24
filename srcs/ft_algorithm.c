@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 18:35:46 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/24 20:23:59 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/25 00:20:48 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,15 @@ static void	reset_graf(t_node *node, t_node *start, int *cuant)
 t_map	**ft_algorithm(t_data *data, t_node *node)
 {
 	t_map	**conj;
+	t_map	*prev;
 	int		i;
 	int		j;
 	int		tmp;
 	int		*cuant;
 	int		max;
 
-	max = ft_min(data->start->n_links, data->end->n_links);
+	if (!(max = ft_min(data->start->n_links, data->end->n_links)))
+		ft_error("Start y Exit no unidos\n");
 	conj = (t_map **)ft_memalloc(sizeof(t_map *) * (max + 1));
 	cuant = (int *)ft_memalloc(sizeof(int) * (data->start->n_links + 1));
 	cuant[data->start->n_links] = -1;
@@ -99,9 +101,10 @@ t_map	**ft_algorithm(t_data *data, t_node *node)
 			if (!i)
 				ft_error("Start y Exit no unidos\n");
 			i--;
-			ft_error("No paths\n");
+			conj[max - j] = prev;
 			prepare_graf(node, conj[max - j][cuant[i]].path, 0);
 			destroy_path(conj[max - j], cuant[i]);
+			ft_error("No paths\n");
 		}
 		ft_printf("Tengo %i caminos\n", cuant[i]);
 		data->start->links[i]->start = 0;
@@ -112,15 +115,17 @@ t_map	**ft_algorithm(t_data *data, t_node *node)
 		}
 		else if (conj[max - j] && i + 1 == max - j + 1)
 		{
-			ft_printf("he completado el conjunto %i\n", max - j);
+			ft_printf("He completado el conjunto %i\n", max - j);
 			reset_graf(node, data->start, cuant);
 			i = 0;
 			j--;
 		}
 		else
 		{
+			ft_printf("Preparo siguiente camino\n");
 			prepare_graf(node, conj[max - j][--cuant[i]].path, 1);
 			i++;
+			prev = conj[max - j];
 			conj[max - j] = conj[max - j]->next;
 		}
 	}

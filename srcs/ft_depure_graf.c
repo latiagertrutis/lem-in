@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 08:18:55 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/20 17:11:47 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/24 23:12:43 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "lem-in.h"
@@ -48,7 +48,7 @@ static int		check_useless_nodes(t_node *graf)
 
 	tmp = graf->links[0];
 	tmp2 = graf->links[1];
-	if (tmp->start || tmp->end || tmp2->start || tmp2->end)
+	if ((tmp->start && tmp2->end) || (tmp->end && tmp2->start))
 		return (0);
 	i = 0;
 	while (i < tmp->n_links)
