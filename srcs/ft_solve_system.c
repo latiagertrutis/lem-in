@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   distribute_ants.c                                  :+:      :+:    :+:   */
+/*   ft_solve_system.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/24 18:22:38 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/25 00:11:20 by mrodrigu         ###   ########.fr       */
+/*   Created: 2018/06/25 14:01:59 by mrodrigu          #+#    #+#             */
+/*   Updated: 2018/06/25 16:31:57 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
 
-static void show_matrix(double **matriz)
+static void show_matrix(double **matriz, int len)
 {
-	for(int i = 0; i < 4; i++)
+	for(int i = 0; i < len; i++)
 	{
-		for(int j = 0; j < 4; j++)
+		for(int j = 0; j < len; j++)
 		{
 			ft_printf("%f ", matriz[i][j]);
 		}
@@ -98,15 +98,15 @@ static void	put_zeros(double **mat, int j, int col, int row)
 	}
 }
 
-int			distribute_ants(double **mat, int row, int col)
+int			ft_solve_system(double **mat, int row, int col)
 {
 	int j;
 	int aux_r;
 
 	j = 0;
-	while(j < 3)
+	while(j < row - 1)
 	{
-		show_matrix(mat);
+		show_matrix(mat, row);
 		if ((aux_r = search_pivot(mat, j, row)) < 0)
 			return (0);
 		change_rows(mat, j, aux_r);
