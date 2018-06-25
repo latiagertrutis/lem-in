@@ -6,25 +6,32 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/18 19:51:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/20 10:47:34 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/25 14:50:03 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
 
-static int	node_sumatory(t_conj *conj)
+static int	node_sumatory(t_map *conj, int len)
 {
 	int sum;
 	int i;
 
 	i = 0;
 	sum = 0;
-	while (i < conj->cuant)
-		sum += conj->path[i++]->len;
+	while (i < len)
+	{
+		sum += conj->len;
+		i++;
+	}
 	return (sum);
 }
 
-int		ft_cuantity_of_ants(t_conj *a, t_conj *b)
+int		ft_cuantity_of_ants(t_map *a, t_map *b, int a_len, int b_len)
 {
-	return (ft_abs(b->cuant * node_sumatory(a) - a->cuant * node_sumatory(b)));
+	return (ft_abs(b_len * node_sumatory(a, a_len) - a_len * node_sumatory(b, b_len)));
 }
+/*
+** a_len & b_len is the cuantity of paths a set has
+** a->len & b->len is the number of nodes each path has
+*/

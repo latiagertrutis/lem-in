@@ -6,7 +6,7 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/06/25 21:54:32 by jagarcia         ###   ########.fr        #
+#    Updated: 2018/06/25 23:44:58 by jagarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,11 @@ LECTOR_FUNCS =	main.c \
 				ft_set_links.c \
 				ft_search_paths2.c \
 				ft_algorithm.c \
-				ft_prepare_conjunts.c
+				ft_prepare_conjunts.c \
+				ft_abs_double.c \
+				ft_solve_system.c \
+				ft_cuantity_of_ants.c \
+				ft_distribute_ants.c
 ALGO_FUNCS =
 
 OBJ_DIR = objects/

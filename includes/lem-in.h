@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 21:05:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/25 21:54:10 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/25 23:45:46 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,8 @@ double			ft_abs_double(double n);
 int				distribute_ants(double **mat, int row, int col);
 void			ft_prepare_conjunts(t_map **paths, int max);
 void			ft_destroy_path(t_map *map, int pos);
+int				ft_solve_system(double **mat, int row, int col);
+int				ft_cuantity_of_ants(t_map *a, t_map *b, int a_len, int b_len);
+void			ft_distribute_ants(t_data *data, t_map **conjs, int len);
 
 #endif
