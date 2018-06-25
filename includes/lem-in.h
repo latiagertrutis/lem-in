@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 21:05:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/25 14:54:03 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/25 17:32:02 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include "../libft/includes/libft.h"
-#define LINK_BUFF 50
-#define SET_BUFF 50
+#define LINK_BUFF 5000
+#define SET_BUFF 5000
 
 typedef struct		s_node
 {
