@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/08 20:32:11 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/24 23:48:02 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/25 11:57:12 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int		main(int argc, char **argv)
 	i = 0;
 	while (paths[i])
 	{
+		ft_printf("Conjunto %i\n", i);
 		ft_map_lector(paths[i], NULL);
 		i++;
 	}

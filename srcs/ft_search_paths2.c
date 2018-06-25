@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 11:23:37 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/25 00:20:38 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/25 12:40:34 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static t_path	*new_path(t_node *node, t_path *next, int *len)
 	path->next = next;
 	path->prev = NULL;
 	path->node = node;
-	node->ihbt = 2;
+	node->ihbt = -1;
 	if (len)
 		(*len)++;
 	return (path);
@@ -102,25 +102,41 @@ t_map	*ft_search_paths2(t_node *start, int *end, int max)
 	int		len;
 	int		i;
 	int		j;
+	int		t;
 	int		flag;
 
 	bfs = ini_bfs(&i, &len, start);
-	flag = 0;
 	while (!bfs[++i].node->end)
 	{
 		j = -1;
 		flag = 0;
-		while(++j < bfs[i].node->n_links)
+		t = 0;
+		ft_printf("max = %i, len = %i, i = %i\n", max, len, i);
+		if (max == bfs[i].node->ihbt + 1)
+		{
+			ft_printf("El tamanyo SI importa\n");
+			flag = 1;
+			while (t < bfs[i].node->n_links && !bfs[i].node->links[t]->end)
+				t++;
+			ft_printf("El nodo %s tiene t = %i\n",bfs[i].node->name, t);
+		}
+		while(++j < bfs[i].node->n_links && (t == bfs[i].node->n_links || !t))
 		{
 			ft_printf("Estoy en %s y esta unido con %s que tiene ihbt=%i\n", bfs[i].node->name, bfs[i].node->links[j]->name,bfs[i].node->links[j]->ihbt);
-			if (!bfs[i].node->links[j]->ihbt)
+
+			if (!bfs[i].node->links[j]->ihbt && !bfs[i].node->links[j]->start)
 			{
+				ft_printf("Voy a anyadir el nodo %s\n", bfs[i].node->links[j]->name);
 				flag = 1;
 				if (!((len + 1) % 1000))
 					bfs = realoj(bfs, len);
 				bfs[++len].node = bfs[i].node->links[j];
 				bfs[len].prev = bfs + i;
-				bfs[len].node->end ? (*end)++ : (bfs[len].node->ihbt = 1);
+				if (bfs[len].node->end)
+					(*end)++;
+				else
+					bfs[len].node->ihbt = bfs[i].node->ihbt + 1;
+//				bfs[len].node->end ? (*end)++ : (bfs[len].node->ihbt = 1);
 			}
 		}
 		if (!flag && !*end)
