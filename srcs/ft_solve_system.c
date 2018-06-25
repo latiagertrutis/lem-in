@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 14:01:59 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/25 16:31:57 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/25 18:54:44 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static int 	search_pivot(double **mat, int j, int fil)
 	int i;
 
 	max = ft_abs_double(mat[j][j]);
+	row = 0;
 	i = j + 1;
 	while (i < fil)
 	{

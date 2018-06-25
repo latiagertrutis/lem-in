@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 21:05:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/25 17:32:02 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/25 18:13:05 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,6 @@ t_map			**ft_algorithm(t_data *data, t_node *node);
 double			ft_abs_double(double n);
 int				ft_solve_system(double **mat, int row, int col);
 int				ft_cuantity_of_ants(t_map *a, t_map *b, int a_len, int b_len);
+void			ft_distribute_ants(t_data *data, t_map **conjs, int len);
 
 #endif

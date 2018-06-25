@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 14:02:47 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/25 16:32:04 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/25 18:55:49 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static int	choose_conj(t_map **conjs, int len, int n_ants)
 
 	i = len - 1;
 	h = n_ants;
+	aux_i = 0;
 	while (i)
 	{
 		j = 0;
@@ -59,7 +60,7 @@ static double	**allocate_matrix(int len)
 	if (!(mat = (double **)malloc(sizeof(double *) * (len + 1))))
 		ft_error(NULL);
 	i = 0;
-	while (i < len)
+	while (i < len + 1)
 	{
 		if (!(mat[i++] = (double *)ft_memalloc(sizeof(double) * (len + 1))))
 			ft_error(NULL);
@@ -108,17 +109,27 @@ void			ft_distribute_ants(t_data *data, t_map **conjs, int len)
 	int		i;
 
 	pos = choose_conj(conjs, len, data->n_ants);
+	ft_printf("\npos: %d\n", pos);
 	mat = allocate_matrix(pos + 1);
 	matrix_gen(conjs[pos], pos + 1, mat);
 	i = 0;
 	while (i < pos + 1)
-		mat[pos + 1][i] = 1.0;
+		mat[pos + 1][i++] = 1.0;
 	mat[pos + 1][pos + 1] = (double)data->n_ants;
-	if(!ft_solve_system(mat, pos + 1, pos + 1))
-		ft_error("No solution found");
-	for(i = 0; i < pos + 1; i++)
+	for(i = 0; i < pos + 2; i++)
 	{
-		for(int j = 0; j < pos + 1; j++)
+		for(int j = 0; j < pos + 2; j++)
+		{
+			ft_printf("%f ", (mat)[i][j]);
+		}
+		ft_printf("\n");
+	}
+	ft_printf("\n");
+	if(!ft_solve_system(mat, pos + 2, pos + 2))
+		ft_error("No solution found");
+	for(i = 0; i < pos + 2; i++)
+	{
+		for(int j = 0; j < pos + 2; j++)
 		{
 			ft_printf("%f ", (mat)[i][j]);
 		}
