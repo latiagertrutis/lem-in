@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 11:23:37 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/26 18:55:31 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/27 00:51:23 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,6 @@ static t_map	*make_path(t_path *bfs, int end, int len)
 	return (conj);
 }
 
-static void
-
 static t_map	*searcher_core(t_path *bfs, int max, int len, int *end)
 {
 	int	i[3];
@@ -116,16 +114,20 @@ static t_map	*searcher_core(t_path *bfs, int max, int len, int *end)
 	return (make_path(bfs, *end, len));	
 }
 
-t_map	*ft_search_paths2(t_node *start, int *end, int max)
+t_map	*ft_search_paths2(t_node *start, int *end, int *max)
 {
 	t_path	*bfs;
 	int		len;
+	t_map	*map;
 
+	*end = 0;
 	if (!(bfs = (t_path *)ft_memalloc(1000 * sizeof(t_path))))
 		ft_error("Error malloc ft_search_paths2\n");
 	bfs[0].node = start;
 	bfs[0].node->ihbt = 1;
 	bfs[0].prev = NULL;
 	len = 0;
-	return (searcher_core(bfs, max, len, end));
+	map = searcher_core(bfs, *max, len, end);
+	*max = 0;
+	return (map);
 }

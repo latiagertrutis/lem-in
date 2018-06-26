@@ -6,7 +6,7 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/06/26 18:10:50 by jagarcia         ###   ########.fr        #
+#    Updated: 2018/06/26 18:59:46 by jagarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,9 +56,7 @@ ALGO_FUNCS =	main.c \
 				ft_distribute_ants.c \
 				ft_solution.c \
 				ft_algorithm_debug.c \
-				ft_depure_graf2.c \
-				algorithm_funcs1.c \
-				algorithm_funcs2.c
+				ft_depure_graf2.c 
 
 OBJ_DIR = objects/
 LIBFT_DIR = libft/

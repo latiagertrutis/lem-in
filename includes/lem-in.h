@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 21:05:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/26 18:07:08 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/26 23:24:08 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void			ft_line_error(int n, char *err);
 void			ft_depure_graf(t_node *graf);
 void			ft_depure_graf2(t_data *data, t_node *node);
 t_map			*ft_search_paths(t_node *graf);
-t_map			*ft_search_paths2(t_node *start, int *end, int max);
+t_map			*ft_search_paths2(t_node *start, int *end, int *max);
 void			ft_map_lector(t_map *map, t_node *graf);
 void			ft_check_number_of_ants(t_data *data, char **line);
 int				check_comment_line(t_data *data, char *line, t_node *node);
@@ -89,7 +89,7 @@ t_map			**ft_algorithm_debug(t_data *data, t_node *node);
 double			ft_abs_double(double n);
 int				distribute_ants(double **mat, int row, int col);
 void			ft_prepare_conjunts(t_map **paths, int max);
-void			ft_destroy_path(t_map *map, int pos);
+t_map			*ft_destroy_path(t_map *map, int pos);
 int				ft_solve_system(double **mat, int row, int col);
 int				ft_cuantity_of_ants(t_map *a, t_map *b, int a_len, int b_len);
 void			ft_distribute_ants(t_data *data, t_map **conjs, int len);
@@ -101,7 +101,7 @@ int				ft_no_more_paths(t_map *map, int *cuant);
 void			ft_assign_prev(t_map *map, t_map *prev);
 int				ft_compare_path(const t_node *node, t_path *path);
 void			ft_prepare_graf(t_node *node, t_map *map, int pos, int mode);
-void			ft_destroy_path(t_map *map, const int n);
+t_map			*ft_destroy_path(t_map *map, const int n);
 void			ft_reset_graf(t_node *node, int *cuant);
 
 
