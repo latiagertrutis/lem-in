@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 21:05:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/26 13:54:28 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/26 18:07:08 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "../libft/includes/libft.h"
 #define LINK_BUFF 5000
 #define SET_BUFF 5000
+#define	ALGORITHM_BUFF 1000
 /*
 **Algorithm Functions
 */
@@ -75,6 +76,7 @@ typedef struct		s_data
 t_node			*ft_reader(t_data *data);
 void			ft_line_error(int n, char *err);
 void			ft_depure_graf(t_node *graf);
+void			ft_depure_graf2(t_data *data, t_node *node);
 t_map			*ft_search_paths(t_node *graf);
 t_map			*ft_search_paths2(t_node *start, int *end, int max);
 void			ft_map_lector(t_map *map, t_node *graf);
@@ -92,5 +94,15 @@ int				ft_solve_system(double **mat, int row, int col);
 int				ft_cuantity_of_ants(t_map *a, t_map *b, int a_len, int b_len);
 void			ft_distribute_ants(t_data *data, t_map **conjs, int len);
 void			ft_solution(t_data *data, t_map *conj, double **mat, int dim);
+int				ft_prepare_next_path(t_map **conj, t_node *node, int cuant, t_map **prev);
+void			ft_no_path(t_map **conj, t_map **prev, t_node *node, int cuant);
+void			ft_finish_conj(t_map **conj, t_node *node, int *cuant, int i);
+int				ft_no_more_paths(t_map *map, int *cuant);
+void			ft_assign_prev(t_map *map, t_map *prev);
+int				ft_compare_path(const t_node *node, t_path *path);
+void			ft_prepare_graf(t_node *node, t_map *map, int pos, int mode);
+void			ft_destroy_path(t_map *map, const int n);
+void			ft_reset_graf(t_node *node, int *cuant);
+
 
 #endif

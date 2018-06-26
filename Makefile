@@ -6,7 +6,7 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/06/26 14:06:42 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/06/26 18:10:50 by jagarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,10 @@ LECTOR_FUNCS =	main.c \
 				ft_solve_system.c \
 				ft_cuantity_of_ants.c \
 				ft_solution.c \
-				ft_distribute_ants.c
+				ft_distribute_ants.c \
+				ft_depure_graf2.c \
+				algorithm_funcs1.c \
+				algorithm_funcs2.c
 
 ALGO_FUNCS =	main.c \
 				ft_reader.c\
@@ -50,10 +53,12 @@ ALGO_FUNCS =	main.c \
 				ft_abs_double.c \
 				ft_solve_system.c \
 				ft_cuantity_of_ants.c \
+				ft_distribute_ants.c \
 				ft_solution.c \
-				ft_distribute_ants.c
-
-ALGO_FUNCS = ft_algorithm_debug.c
+				ft_algorithm_debug.c \
+				ft_depure_graf2.c \
+				algorithm_funcs1.c \
+				algorithm_funcs2.c
 
 OBJ_DIR = objects/
 LIBFT_DIR = libft/

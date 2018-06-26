@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/08 20:32:11 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/26 15:47:12 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/26 18:57:18 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,10 @@ int		main(int argc, char **argv)
 	/* } */
 
 
-//	ft_map_lector(NULL, node);
-//	ft_depure_graf(node);
+	ft_map_lector(NULL, node);
+	ft_depure_graf2(&data, node);
 	ft_printf("MAP DEPURED \n");
-//	ft_map_lector(NULL, node);
-	ft_putstr("AAAAAA");
+	ft_map_lector(NULL, node);
 	paths = ft_algorithm(&data, node);
 	ft_prepare_conjunts(paths, ft_min(data.start->n_links, data.end->n_links));
 //	paths = ft_search_paths2(&data);
