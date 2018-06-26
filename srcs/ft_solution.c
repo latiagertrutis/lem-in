@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 21:52:24 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/26 15:30:16 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/26 18:42:37 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ static int		send_ants(int dim, t_map *conj, double **mat, int *ant)
 		if (mat[i][dim - 1] > 0.9)
 		{
 			(*ant)++;
-			ft_printf("%sL%d-%s ", assign_color(*ant), *ant, conj->path->node->name);
+			ft_printf("%sL%d-%s ", assign_color(*ant),
+									*ant, conj->path->node->name);
 			mat[i][dim - 1]--;
 			conj->path->node->ants = *ant;
 			centi = 1;
@@ -59,7 +60,8 @@ static void		lagging_ants(t_data *data, int *ant, t_map *conj)
 	while (conj && *ant != data->n_ants)
 	{
 		(*ant)++;
-		ft_printf("%sL%d-%s ", assign_color(*ant), *ant, conj->path->node->name);
+		ft_printf("%sL%d-%s ", assign_color(*ant),
+								*ant, conj->path->node->name);
 		conj->path->node->ants = *ant;
 		conj = conj->next;
 	}
@@ -76,11 +78,11 @@ static int		move_ants(t_data *data, t_map *conj)
 		{
 			if (path->node->ants)
 			{
-				ft_printf("%sL%d-%s ", assign_color(path->node->ants), path->node->ants, path->next->node->name);
+				ft_printf("%sL%d-%s ", assign_color(path->node->ants),
+							path->node->ants, path->next->node->name);
 				if (path->next->node->end)
 				{
-					path->next->node->ants++;
-					if (path->node->ants == data->n_ants)
+					if (++(path->next->node->ants) == data->n_ants)
 						return (0);
 				}
 				else
@@ -91,7 +93,7 @@ static int		move_ants(t_data *data, t_map *conj)
 		}
 		conj = conj->next;
 	}
-	return(1);
+	return (1);
 }
 
 void			ft_solution(t_data *data, t_map *conj, double **mat, int dim)
