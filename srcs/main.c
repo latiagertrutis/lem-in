@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/08 20:32:11 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/26 16:22:47 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/26 18:57:18 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ int		main(int argc, char **argv)
 //	paths = ft_search_paths2(&data);
 	ft_printf("PATHS GENERATE \n");
 	i = 0;
-	while (paths[i])
+	int min = ft_min(data.end->n_links, data.start->n_links);
+	ft_printf("min es: %d\n", min);
+	while (i < min)
 	{
 		ft_printf("Conjunto %i\n", i);
 		ft_map_lector(paths[i], NULL);

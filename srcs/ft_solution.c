@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 21:52:24 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/26 13:51:55 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/26 15:30:16 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,12 @@ static char		*assign_color(int ant)
 	char	*aux;
 	int		len;
 
-	aux = ft_itoa(ant);
+	aux = ft_itoa((ant * 4) % 256);
 	len = ft_strlen(aux);
 	str = ft_strjoin("{C:", aux);
 	free(aux);
 	aux = str;
 	str = ft_strjoin(aux, "}");
-	free(aux);
-	aux = str;
-	str = ft_strnjoin(aux, aux + 3, len);
-	free(aux);
-	aux = str;
-	str = ft_strjoin(aux, "{eoc}");
 	free(aux);
 	return (str);
 }
@@ -46,7 +40,7 @@ static int		send_ants(int dim, t_map *conj, double **mat, int *ant)
 		if (mat[i][dim - 1] > 0.9)
 		{
 			(*ant)++;
-			ft_printf("L%s-%s ", assign_color(*ant), conj->path->node->name);
+			ft_printf("%sL%d-%s ", assign_color(*ant), *ant, conj->path->node->name);
 			mat[i][dim - 1]--;
 			conj->path->node->ants = *ant;
 			centi = 1;
@@ -65,7 +59,7 @@ static void		lagging_ants(t_data *data, int *ant, t_map *conj)
 	while (conj && *ant != data->n_ants)
 	{
 		(*ant)++;
-		ft_printf("L%s-%s ", assign_color(*ant), conj->path->node->name);
+		ft_printf("%sL%d-%s ", assign_color(*ant), *ant, conj->path->node->name);
 		conj->path->node->ants = *ant;
 		conj = conj->next;
 	}
@@ -82,7 +76,7 @@ static int		move_ants(t_data *data, t_map *conj)
 		{
 			if (path->node->ants)
 			{
-				ft_printf("L%s-%s ", assign_color(path->node->ants), path->next->node->name);
+				ft_printf("%sL%d-%s ", assign_color(path->node->ants), path->node->ants, path->next->node->name);
 				if (path->next->node->end)
 				{
 					path->next->node->ants++;
@@ -114,5 +108,5 @@ void			ft_solution(t_data *data, t_map *conj, double **mat, int dim)
 	}
 	while (move_ants(data, conj))
 		ft_putstr("\n");
-	ft_putstr("\n");
+	ft_printf("{eoc}\n");
 }
