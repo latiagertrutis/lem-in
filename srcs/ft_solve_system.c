@@ -6,30 +6,17 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 14:01:59 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/26 13:06:16 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/26 18:45:07 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
 
-static void show_matrix(double **matriz, int len)
+static int	search_pivot(double **mat, int j, int fil)
 {
-	for(int i = 0; i < len; i++)
-	{
-		for(int j = 0; j < len; j++)
-		{
-			ft_printf("%f ", matriz[i][j]);
-		}
-		ft_printf("\n");
-	}
-	ft_printf("\n");
-}
-
-static int 	search_pivot(double **mat, int j, int fil)
-{
-	double max;
-	int row;
-	int i;
+	double	max;
+	int		row;
+	int		i;
 
 	max = ft_abs_double(mat[j][j]);
 	row = 0;
@@ -54,7 +41,6 @@ static void	change_rows(double **mat, int j, int aux_r)
 
 	if (aux_r != j)
 	{
-//		ft_printf("ha cambiado\n");
 		aux = mat[j];
 		mat[j] = mat[aux_r];
 		mat[aux_r] = aux;
@@ -63,14 +49,13 @@ static void	change_rows(double **mat, int j, int aux_r)
 
 static void	normalize(double **mat, int j, int col)
 {
-	double piv;
-	int i;
+	double	piv;
+	int		i;
 
 	piv = mat[j][j];
 	i = j;
 	while (i < col)
 	{
-//		ft_printf("ha normalizado\n");
 		mat[j][i] = mat[j][i] / piv;
 		i++;
 	}
@@ -78,9 +63,9 @@ static void	normalize(double **mat, int j, int col)
 
 static void	put_zeros(double **mat, int j, int col, int row)
 {
-	double factor;
-	int i;
-	int k;
+	double	factor;
+	int		i;
+	int		k;
 
 	i = 0;
 	while (i < row)
@@ -105,9 +90,8 @@ int			ft_solve_system(double **mat, int row, int col)
 	int aux_r;
 
 	j = 0;
-	while(j < row - 1)
+	while (j < row - 1)
 	{
-//		show_matrix(mat, row);
 		if ((aux_r = search_pivot(mat, j, row)) < 0)
 			return (0);
 		change_rows(mat, j, aux_r);
