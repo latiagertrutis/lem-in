@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 14:02:47 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/25 18:55:49 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/26 13:12:02 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,4 +135,5 @@ void			ft_distribute_ants(t_data *data, t_map **conjs, int len)
 		}
 		ft_printf("\n");
 	}
+	ft_solution(data, conjs[pos], mat, len + 1);
 }

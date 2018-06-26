@@ -6,7 +6,7 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/06/25 18:13:49 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/06/26 13:03:26 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ LECTOR_FUNCS =	main.c \
 				ft_abs_double.c \
 				ft_solve_system.c \
 				ft_cuantity_of_ants.c \
-				ft_distribute_ants.c
+				ft_distribute_ants.c \
+				ft_solution.c
 ALGO_FUNCS =
 
 OBJ_DIR = objects/

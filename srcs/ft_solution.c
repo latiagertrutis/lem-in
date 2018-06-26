@@ -6,11 +6,33 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 21:52:24 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/25 23:40:49 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/26 13:51:55 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
+
+static char		*assign_color(int ant)
+{
+	char	*str;
+	char	*aux;
+	int		len;
+
+	aux = ft_itoa(ant);
+	len = ft_strlen(aux);
+	str = ft_strjoin("{C:", aux);
+	free(aux);
+	aux = str;
+	str = ft_strjoin(aux, "}");
+	free(aux);
+	aux = str;
+	str = ft_strnjoin(aux, aux + 3, len);
+	free(aux);
+	aux = str;
+	str = ft_strjoin(aux, "{eoc}");
+	free(aux);
+	return (str);
+}
 
 static int		send_ants(int dim, t_map *conj, double **mat, int *ant)
 {
@@ -23,13 +45,14 @@ static int		send_ants(int dim, t_map *conj, double **mat, int *ant)
 	{
 		if (mat[i][dim - 1] > 0.9)
 		{
-			ft_printf("L%d-%s", *ant, conj->path->node->name);
-			mat[i][dim - 1]--;
 			(*ant)++;
+			ft_printf("L%s-%s ", assign_color(*ant), conj->path->node->name);
+			mat[i][dim - 1]--;
 			conj->path->node->ants = *ant;
 			centi = 1;
 		}
 		conj = conj->next;
+		i++;
 	}
 	return (centi);
 }
@@ -41,8 +64,8 @@ static void		lagging_ants(t_data *data, int *ant, t_map *conj)
 	i = 0;
 	while (conj && *ant != data->n_ants)
 	{
-		ft_printf("L%d-%s", *ant, conj->path->node->name);
 		(*ant)++;
+		ft_printf("L%s-%s ", assign_color(*ant), conj->path->node->name);
 		conj->path->node->ants = *ant;
 		conj = conj->next;
 	}
@@ -54,12 +77,12 @@ static int		move_ants(t_data *data, t_map *conj)
 
 	while (conj)
 	{
-		path = conj->tail;
+		path = conj->tail->prev;
 		while (path)
 		{
 			if (path->node->ants)
 			{
-				ft_printf("L%d-%s", path->node->ants, path->next->node->name);
+				ft_printf("L%s-%s ", assign_color(path->node->ants), path->next->node->name);
 				if (path->next->node->end)
 				{
 					path->next->node->ants++;
@@ -81,12 +104,15 @@ void			ft_solution(t_data *data, t_map *conj, double **mat, int dim)
 {
 	int ant;
 
-	ant = 1;
-	while (ant != data->n_ants)
+	ant = 0;
+	while (ant < data->n_ants)
 	{
 		move_ants(data, conj);
 		if (!send_ants(dim, conj, mat, &ant))
 			lagging_ants(data, &ant, conj);
+		ft_putstr("\n");
 	}
-	while (move_ants(data, conj));
+	while (move_ants(data, conj))
+		ft_putstr("\n");
+	ft_putstr("\n");
 }

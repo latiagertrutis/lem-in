@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/08 20:32:11 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/25 18:16:09 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/26 13:01:52 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int		main(int argc, char **argv)
 		ft_map_lector(paths[i], NULL);
 		i++;
 	}
-	ft_distribute_ants(&data, paths, 2);
+	ft_printf("\nlen es: %d\n", i);
+	ft_distribute_ants(&data, paths, i);
 //	ft_putstr(data.start->name);
 	return (0);
 }
