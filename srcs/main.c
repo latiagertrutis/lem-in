@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/08 20:32:11 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/25 23:45:59 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/26 11:25:24 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		main(int argc, char **argv)
 	paths = ft_algorithm(&data, node);
 	ft_prepare_conjunts(paths, ft_min(data.start->n_links, data.end->n_links));
 //	paths = ft_search_paths2(&data);
-//	ft_printf("PATHS GENERATE \n");
+	ft_printf("PATHS GENERATE \n");
 	i = 0;
 	while (paths[i])
 	{
@@ -49,7 +49,7 @@ int		main(int argc, char **argv)
 		ft_map_lector(paths[i], NULL);
 		i++;
 	}
-	ft_distribute_ants(&data, paths, 2);
+//	ft_distribute_ants(&data, paths, 2);
 //	ft_putstr(data.start->name);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 18:35:46 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/26 12:55:56 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/26 11:56:34 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,95 +89,14 @@ static void	reset_graf(t_node *node, t_node *start, int *cuant)
 		cuant[i++] = 0;
 }
 
-static int	algorithm_FUNC(t_map *map, void *data, int FUNC)
-{
-	t_map	*prev;
-	int		*cuant;
-	int		tmp;
-	
-	if (FUNC == PREV)
-	{
-		prev = (t_map *)data;
-		if (prev)
-		{
-			prev->next = map;
-			map->prev = prev;
-		}
-	}
-	if (FUNC == CUANT0)
-	{
-		cuant = (int *)data;
-		if (!*cuant)
-		{
-			tmp = map->len;
-			ft_destroy_path(map, 0);
-			return (tmp);
-		}
-	}
-	return (0);
-}
-
-
-static void	ft_algorithm_core(t_map **conj, int *cuant, t_data *data, t_node *node)
-{
-	int		i;
-	int		j;
-	int		tmp;
-	int		max;
-	t_map	*prev;
-
-	if (!(max = ft_min(data->start->n_links, data->end->n_links)))
-		ft_error("Start y Exit no unidos\n");
-	i = 0;
-	j = max;
-	prev = NULL;
-	while (i < data->start->n_links && i >= 0 && j > 0)
-	{
-		data->start->ihbt = 1;
-		data->start->links[i]->start = 0x1;
-		if (!(conj[max - j] = ft_search_paths2(data->start->links[i], cuant + i, tmp)))
-		{
-			if (!i--)
-				ft_error("Start y Exit no unidos\n");
-			conj[max - j] = prev;
-			prev = NULL;
-			prepare_graf(node, conj[max - j], cuant[i], 0);
-			if (cuant[i])
-				ft_destroy_path(conj[max - j], cuant[i] + 1);
-		}
-		data->start->links[i]->start = 0;
-		algorithm_FUNC(conj[max - j], prev, PREV);
-//		algorithm_FUNC(conj[max - j], cuant + i, CUANT0);
-		if (!cuant[i])
-		{
-			tmp = conj[max - j]->len;
-			ft_destroy_path(conj[max - j], 0);
-		}
-		else if (conj[max - j] && i + 1 == max - j + 1)
-		{
-			conj[max - j]->len *= -1;
-			while (conj[max - j]->prev)
-				conj[max - j] = conj[max - j]->prev;
-			reset_graf(node, data->start, cuant);
-			j--;
-			i = 0;
-		}
-		else
-		{
-			tmp = 0;
-			prepare_graf(node, conj[max - j], --cuant[i++], 1);
-			prev = conj[max - j];
-			conj[max - j] = conj[max - j]->next;
-		}
-	}
-}
-
 t_map	**ft_algorithm(t_data *data, t_node *node)
 {
 	t_map	**conj;
 	t_map	*prev;
+	t_map	*head;
 	int		i;
 	int		j;
+	int		k;
 	int		tmp;
 	int		*cuant;
 	int		max;
@@ -185,55 +104,87 @@ t_map	**ft_algorithm(t_data *data, t_node *node)
 	prev = NULL;
 	if (!(max = ft_min(data->start->n_links, data->end->n_links)))
 		ft_error("Start y Exit no unidos\n");
-	if (!(conj = (t_map **)ft_memalloc(sizeof(t_map *) * (max + 1))))
-		ft_error("Error Malloc algorithm\n");
-	if (!(cuant = (int *)ft_memalloc(sizeof(int) * data->start->n_links)))
-		ft_error("Error Malloc algorithm\n");
+	conj = (t_map **)ft_memalloc(sizeof(t_map *) * (max + 1));
+	cuant = (int *)ft_memalloc(sizeof(int) * (data->start->n_links + 1));
+	cuant[data->start->n_links] = -1;
+	conj[max] = NULL;
+	tmp = 0;
 	i = 0;
 	j = max;
-	ft_algorithm_core(conj, cuant, data, node);
+	ft_printf("Debo tener %i conjuntos\n", max);
+	while (i < data->start->n_links && i >= 0 && j > 0)
+	{
+		data->start->ihbt = 1;
+		data->start->links[i]->start = 0x1;
+		ft_printf("El proximo camino debera ser menor de %i\n", tmp);
+		if (!(conj[max - j] = ft_search_paths2(data->start->links[i], cuant + i, tmp)))
+		{
+			ft_printf("No he encontrado paths\n");
+			if (!i)
+				ft_error("Start y Exit no unidos\n");
+			i--;
+			conj[max - j] = prev;
+			prev = NULL;
+			ft_printf("cuant = %i\n", cuant[i]);
+			prepare_graf(node, conj[max - j], cuant[i], 0);
+			ft_printf("Borro el camino %i\n", cuant[i]);
+			if (cuant[i])
+				ft_destroy_path(conj[max - j], cuant[i] + 1);
+//			for(t_node *tmp = node; tmp; tmp = tmp->next)
+				//		ft_printf("El nodo %s esta a %i\n", tmp->name, tmp->ihbt);
+//			ft_error("No paths\n");
+		}
+		ft_printf("Tengo %i caminos\n", cuant[i]);
+		data->start->links[i]->start = 0;
+		if (!cuant[i])
+		{
+			ft_printf("Ya no me quedan caminos y el anterior media %i\n", conj[max - j]->len);
+			tmp = conj[max - j]->len;
+			ft_destroy_path(conj[max - j], 0);
+			prev = NULL;
+		}
+		else if (conj[max - j] && i + 1 == max - j + 1)
+		{
+			k = 0;
+			ft_printf("He completado el conjunto %i\n", max - j);
+			conj[max - j]->len *= -1;
+			if (prev)
+			{
+				prev->next = conj[max - j];
+				conj[max - j]->prev = prev;
+			}
+			while (conj[max - j]->prev)
+			{
+				ft_printf("Rebobino\n");
+				conj[max - j] = conj[max - j]->prev;
+			}
+			if (!conj[max - j]->next)
+				ft_putstr("No hay next\n");
+			prev = NULL;
+			reset_graf(node, data->start, cuant);
+			i = 0;
+			j--;
+		}
+		else
+		{
+			ft_printf("Preparo siguiente camino cuant=%i\n", cuant[i]);
+//			ft_putstr("[[[[\n");
+//			ft_map_lector(conj[max - j], NULL);
+//			ft_putstr("]]]]\n");
+			tmp = 0;
+			prepare_graf(node, conj[max - j], --cuant[i], 1);
+			i++;
+			ft_printf("Preparado\n");
+			if (prev)
+			{
+				prev->next = conj[max - j];
+				ft_printf("Voy a poner el nodo %s detras\n", prev->path->node->name);
+				conj[max - j]->prev = prev;
+			}
+			prev = conj[max - j];
+			conj[max - j] = conj[max - j]->next;
+//			conj[max - j]->prev = prev;
+		}
+	}
 	return (conj);
-	/* while (i < data->start->n_links && i >= 0 && j > 0) */
-	/* { */
-	/* 	data->start->ihbt = 1; */
-	/* 	data->start->links[i]->start = 0x1; */
-	/* 	if (!(conj[max - j] = ft_search_paths2(data->start->links[i], cuant + i, tmp))) */
-	/* 	{ */
-	/* 		if (!i--) */
-	/* 			ft_error("Start y Exit no unidos\n"); */
-	/* 		conj[max - j] = prev; */
-	/* 		prev = NULL; */
-	/* 		prepare_graf(node, conj[max - j], cuant[i], 0); */
-	/* 		if (cuant[i]) */
-	/* 			ft_destroy_path(conj[max - j], cuant[i] + 1); */
-	/* 	} */
-	/* 	data->start->links[i]->start = 0; */
-	/* 	if (prev) */
-	/* 	{ */
-	/* 		prev->next = conj[max - j]; */
-	/* 		conj[max - j]->prev = prev; */
-	/* 	} */
-	/* 	if (!cuant[i]) */
-	/* 	{ */
-	/* 		tmp = conj[max - j]->len; */
-	/* 		ft_destroy_path(conj[max - j], 0); */
-	/* 	} */
-	/* 	else if (conj[max - j] && i + 1 == max - j + 1) */
-	/* 	{ */
-	/* 		conj[max - j]->len *= -1; */
-	/* 		while (conj[max - j]->prev) */
-	/* 			conj[max - j] = conj[max - j]->prev; */
-	/* 		reset_graf(node, data->start, cuant); */
-	/* 		j--; */
-	/* 		i = 0; */
-	/* 	} */
-	/* 	else */
-	/* 	{ */
-	/* 		tmp = 0; */
-	/* 		prepare_graf(node, conj[max - j], --cuant[i++], 1); */
-	/* 		prev = conj[max - j]; */
-	/* 		conj[max - j] = conj[max - j]->next; */
-	/* 	} */
-	/* } */
-	/* return (conj); */
 }

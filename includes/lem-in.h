@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 21:05:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/25 23:45:46 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/26 12:52:28 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@
 # include "../libft/includes/libft.h"
 #define LINK_BUFF 5000
 #define SET_BUFF 5000
+/*
+**Algorithm Functions
+*/
+#define	PREV 1
+#define	CUANT0 2
 
 typedef struct		s_node
 {
@@ -78,6 +83,7 @@ int				check_comment_line(t_data *data, char *line, t_node *node);
 char			*ft_ini_node(t_data *data, t_node *node, char *line);
 void			ft_set_links(t_data *data, char *line, t_node *head);
 t_map			**ft_algorithm(t_data *data, t_node *node);
+t_map			**ft_algorithm_debug(t_data *data, t_node *node);
 double			ft_abs_double(double n);
 int				distribute_ants(double **mat, int row, int col);
 void			ft_prepare_conjunts(t_map **paths, int max);

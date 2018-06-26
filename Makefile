@@ -6,7 +6,7 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/06/25 23:44:58 by jagarcia         ###   ########.fr        #
+#    Updated: 2018/06/26 11:54:06 by jagarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,24 @@ LECTOR_FUNCS =	main.c \
 				ft_solve_system.c \
 				ft_cuantity_of_ants.c \
 				ft_distribute_ants.c
-ALGO_FUNCS =
+
+ALGO_FUNCS =	main.c \
+				ft_reader.c\
+				ft_line_error.c \
+				ft_map_lector.c \
+				ft_depure_graf.c \
+				ft_search_paths.c \
+				ft_check_number_of_ants.c \
+				check_comment_line.c \
+				ft_ini_node.c \
+				ft_set_links.c \
+				ft_search_paths2.c \
+				ft_prepare_conjunts.c \
+				ft_abs_double.c \
+				ft_solve_system.c \
+				ft_cuantity_of_ants.c \
+				ft_distribute_ants.c \
+				ft_algorithm_debug.c
 
 OBJ_DIR = objects/
 LIBFT_DIR = libft/
@@ -56,6 +73,9 @@ all : $(NAME)
 
 $(NAME) : $(LECTOR_OBJ) $(LIBFT_DIR)$(LIBFT_NAME)
 	gcc $(LECTOR_OBJ) -L$(LIBFT_DIR) -l$(LIBFT_ABREV) -I$(INCLUDES_DIR) $(CFLAGS) -o $(NAME)
+
+debug : $(ALGO_OBJ) $(LIBFT_DIR)$(LIBFT_NAME)
+	gcc $(ALGO_OBJ) -L$(LIBFT_DIR) -l$(LIBFT_ABREV) -I$(INCLUDES_DIR) $(CFLAGS) -o $(NAME)
 
 $(LIBFT_DIR)$(LIBFT_NAME):
 	$(MAKE) -C $(LIBFT_DIR)
