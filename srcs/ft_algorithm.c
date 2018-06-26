@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 18:35:46 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/26 12:55:56 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/26 13:45:26 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	ft_destroy_path(t_map *map, const int n)
 	free(map);
 }
 
-static void	reset_graf(t_node *node, t_node *start, int *cuant)
+static void	reset_graf(t_node *node, int *cuant)
 {
 	int	i;
 
@@ -85,7 +85,7 @@ static void	reset_graf(t_node *node, t_node *start, int *cuant)
 		node->ihbt = 0;
 		node = node->next;
 	}
-	while (i < start->n_links)
+	while (cuant[i] > 0)
 		cuant[i++] = 0;
 }
 
@@ -104,7 +104,7 @@ static int	algorithm_FUNC(t_map *map, void *data, int FUNC)
 			map->prev = prev;
 		}
 	}
-	if (FUNC == CUANT0)
+	else if (FUNC == CUANT0)
 	{
 		cuant = (int *)data;
 		if (!*cuant)
@@ -117,7 +117,14 @@ static int	algorithm_FUNC(t_map *map, void *data, int FUNC)
 	return (0);
 }
 
-
+static void	finish_conj(t_map **conj, t_node *node, int *cuant, int i)
+{
+	(*conj)->len *= -1;
+	while ((*conj)->prev)
+		(*conj) = (*conj)->prev;
+	reset_graf(node, cuant);
+	i = 0;
+}
 static void	ft_algorithm_core(t_map **conj, int *cuant, t_data *data, t_node *node)
 {
 	int		i;
@@ -138,31 +145,27 @@ static void	ft_algorithm_core(t_map **conj, int *cuant, t_data *data, t_node *no
 		if (!(conj[max - j] = ft_search_paths2(data->start->links[i], cuant + i, tmp)))
 		{
 			if (!i--)
-				ft_error("Start y Exit no unidos\n");
+				ft_error("CACA");
+//			i ? i-- : ft_error("Start y Exit no unidos\n");
 			conj[max - j] = prev;
 			prev = NULL;
 			prepare_graf(node, conj[max - j], cuant[i], 0);
-			if (cuant[i])
-				ft_destroy_path(conj[max - j], cuant[i] + 1);
+			cuant[i] ? ft_destroy_path(conj[max - j], cuant[i] + 1): cuant[i];
 		}
 		data->start->links[i]->start = 0;
 		algorithm_FUNC(conj[max - j], prev, PREV);
-//		algorithm_FUNC(conj[max - j], cuant + i, CUANT0);
-		if (!cuant[i])
+		tmp = algorithm_FUNC(conj[max - j], cuant + i, CUANT0);
+		if (cuant[i] && conj[max - j] && i + 1 == max - j + 1)
 		{
-			tmp = conj[max - j]->len;
-			ft_destroy_path(conj[max - j], 0);
-		}
-		else if (conj[max - j] && i + 1 == max - j + 1)
-		{
+//			finish_conj(conj + max - j--, node, cuant, i);
 			conj[max - j]->len *= -1;
 			while (conj[max - j]->prev)
 				conj[max - j] = conj[max - j]->prev;
-			reset_graf(node, data->start, cuant);
+			reset_graf(node, cuant);
 			j--;
 			i = 0;
 		}
-		else
+		else if (cuant[i])
 		{
 			tmp = 0;
 			prepare_graf(node, conj[max - j], --cuant[i++], 1);
@@ -187,8 +190,9 @@ t_map	**ft_algorithm(t_data *data, t_node *node)
 		ft_error("Start y Exit no unidos\n");
 	if (!(conj = (t_map **)ft_memalloc(sizeof(t_map *) * (max + 1))))
 		ft_error("Error Malloc algorithm\n");
-	if (!(cuant = (int *)ft_memalloc(sizeof(int) * data->start->n_links)))
+	if (!(cuant = (int *)ft_memalloc(sizeof(int) * (data->start->n_links + 1))))
 		ft_error("Error Malloc algorithm\n");
+	cuant[data->start->n_links] = -1;
 	i = 0;
 	j = max;
 	ft_algorithm_core(conj, cuant, data, node);
