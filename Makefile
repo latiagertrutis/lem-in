@@ -6,7 +6,7 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/06/26 11:54:06 by jagarcia         ###   ########.fr        #
+#    Updated: 2018/06/26 13:54:16 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,8 @@ ALGO_FUNCS =	main.c \
 				ft_solve_system.c \
 				ft_cuantity_of_ants.c \
 				ft_distribute_ants.c \
+				ft_solution.c
+ALGO_FUNCS =
 				ft_algorithm_debug.c
 
 OBJ_DIR = objects/
