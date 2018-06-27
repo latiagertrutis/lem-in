@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 18:35:46 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/27 18:04:45 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/27 22:25:51 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,22 @@ t_map	**ft_algorithm(t_data *data, t_node *node, int max)
 	cuant = 0;
 	while (i[0] < data->start->n_links && i[0] >= 0 && i[1] > 0)
 	{
-		data->start->ihbt = 1;
-		data->start->links[i[0]]->start = 0x1;
+//		data->start->ihbt = 1;
+//		data->start->links[i[0]]->start = 0x1;
+		ft_printf("tmp vale %i\n", tmp);
 		if (!(conj[max - i[1]] = ft_search_paths(data->start, &cuant, &tmp)))
 		{
 			ft_printf("No he encontrado camino voy a destruit el camino\n");
 			i[0]--;
 			tmp = ft_no_path(node, tail_head, &cuant, conj + max - i[1]);
 		}
-		data->start->links[i[0]]->start = 0;
+//		data->start->links[i[0]]->start = 0;
 		ft_printf("Tengo %i caminos y son:\n", cuant);
-		if (!tail_head[0])
-			ft_map_lector(conj[max - i[1]], NULL);
-		else
+		if (tail_head[0])
 			ft_map_lector(tail_head[0], NULL);
+		ft_printf("\n");
+		if (conj[max - i[1]])
+			ft_map_lector(conj[max - i[1]], NULL);
 		if (conj[max - i[1]] && i[0] + 1 == max - i[1] + 1)
 		{
 			ft_printf("He acabado un conjunto y es:\n");

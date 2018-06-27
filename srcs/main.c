@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/08 20:32:11 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/27 18:06:25 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/27 22:05:31 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		main(int argc, char **argv)
 	/* } */
 
 
-//	ft_map_lector(NULL, node);
+	ft_map_lector(NULL, node);
 	ft_depure_graf(&data, node);
 	ft_printf("MAP DEPURED \n");
 	ft_map_lector(NULL, node);
@@ -44,7 +44,7 @@ int		main(int argc, char **argv)
 //	paths = ft_search_paths2(&data);
 	ft_printf("PATHS GENERATE \n");
 	i = 0;
-//	ft_printf("min es: %d\n", min);
+	ft_printf("min es: %d\n", min);
 	while (i < min)
 	{
 		ft_printf("Conjunto %i\n", i);

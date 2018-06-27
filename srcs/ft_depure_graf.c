@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 11:23:37 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/27 17:54:21 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/27 22:02:09 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,37 @@ static void	cut_and_reset(t_node *true_start, int pos, t_node *node, int reset)
 	{
 		while (pos + 1 < true_start->n_links)
 		{
+//			ft_printf("%s ahora es %s\n", true_start->links[pos]->name, true_start->links[pos + 1]->name);
 			true_start->links[pos] = true_start->links[pos + 1];
 			pos++;
 		}
 		true_start->n_links--;
 		true_start->links[pos] = NULL;
+	}
+}
+
+static void	check_start_end_links(t_node *start, t_node *end)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < start->n_links)
+	{
+		j = i + 1;
+		while (j < start->n_links)
+			if (start->links[i]->id == start->links[j++]->id && !start->links[i]->end)
+				cut_and_reset(start, i, NULL, 0);
+		i++;
+	}
+	i = 0;
+	while (i < end->n_links)
+	{
+		j = i + 1;
+		while (j < end->n_links)
+			if (end->links[i]->id == end->links[j++]->id && !end->links[i]->start)
+				cut_and_reset(end, i, NULL, 0);
+		i++;
 	}
 }
 
@@ -102,6 +128,8 @@ void	ft_depure_graf(t_data *data, t_node *node)
 	int		i;
 
 	i = 0;
+	check_start_end_links(data->start, data->end);
+	
 	while (i < data->start->n_links)
 	{
 		start = data->start->links[i];

@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 13:45:50 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/27 17:51:16 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/27 22:23:27 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_map	*ft_destroy_path(t_map **map)
 	}
 	else
 	{
+		ft_printf("Deberia valer NULL\n");
 		tmp = NULL;
 		tmp2 = NULL;
 	}
@@ -75,7 +76,7 @@ t_map		*ft_prepare_graf(t_node *node, t_map *map, int pos, int mode)
 		pos--;
 	}
 	path = map->path;	
-//	show_path(path);
+	show_path(path);
 	map->len *= -1;
 	while (node)
 	{
@@ -99,14 +100,16 @@ int		ft_no_path(t_node *node, t_map *(tail_head[2]), int *cuant, t_map **conj)
 {
 	int		tmp;
 	
-	if (tail_head[0])
-		*conj = tail_head[0];
 	tmp = 0;
-	if (!(*cuant - 1) || tail_head[1]->path->node->id != tail_head[1]->prev->path->node->id)
+	if (!(*cuant - 1) || tail_head[1]->path->next->node->id != tail_head[1]->prev->path->next->node->id)
+	{
 		tmp = tail_head[1]->len;
+	}
 	tmp < 0 ? tmp *= -1 : tmp;
 	ft_prepare_graf(node, tail_head[0], --(*cuant), 0);
-	tail_head[1] = ft_destroy_path(&tail_head[0]);
+	tail_head[1] = ft_destroy_path(tail_head);
+	if (tail_head[0])
+		*conj = tail_head[0];
 	return (tmp);
 }
 
