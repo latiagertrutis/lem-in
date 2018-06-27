@@ -5,56 +5,107 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/26 18:00:34 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/26 18:07:46 by jagarcia         ###   ########.fr       */
+/*   Created: 2018/06/27 13:45:50 by jagarcia          #+#    #+#             */
+/*   Updated: 2018/06/27 13:47:37 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "lem-in.h"
 
-void	ft_assign_prev(t_map *map, t_map *prev)
+t_map	*ft_destroy_path(t_map **map)
 {
-	if (prev)
+	t_path	*aux;
+	t_map	*tmp;
+	t_map	*tmp2;
+
+	tmp2 = *map;
+	while ((*map)->next)
+		(*map) = (*map)->next;
+	while ((*map)->path)
 	{
-		prev->next = map;
-		map->prev = prev;
+		aux = (*map)->path->next;
+		free((*map)->path);
+		(*map)->path = aux;
 	}
+	if ((*map)->prev)
+	{
+		(*map)->prev->next = NULL;
+		tmp = (*map)->prev;
+	}
+	else
+	{
+		tmp = NULL;
+		tmp2 = NULL;
+	}
+	free((*map));
+	(*map) = tmp2;
+	return (tmp);
 }
 
-int ft_no_more_paths(t_map *map, int *cuant)
+static int		compare_path(const t_node *node, t_path *path)
 {
-	int tmp;
+	while (path)
+	{
+		if (path->node == node)
+			return (1);
+		path = path->next;
+	}
+	return (0);
+}
+
+t_map		*ft_prepare_graf(t_node *node, t_map *map, int pos, int mode)
+{
+	t_path *path;
+	t_map	*tmp;
+
+	tmp = map;
+	while (pos)
+	{
+		map = map->next;
+		pos--;
+	}
+	path = map->path;
+	map->len *= -1;
+	while (node)
+	{
+		if ((node->ihbt && !mode && (node->ihbt != -1 || compare_path(node, path))) || node->end)
+			node->ihbt = 0;
+		else if (mode && node->ihbt != -1 && compare_path(node, path))
+			node->ihbt = -1;
+		else if (node->ihbt != -1)
+			node->ihbt = 0;
+		node = node->next;
+	}
+	while(tmp->next)
+		tmp = tmp->next;
 	
-	if (!*cuant)
-	{
-		tmp = map->len;
-		ft_destroy_path(map, 0);
-		return (tmp);
-	}
-	return (0);
+	return (tmp);
 }
 
-void	ft_finish_conj(t_map **conj, t_node *node, int *cuant, int i)
+int		ft_no_path(t_node *node, t_map *(tail_head[2]), int *cuant, t_map **conj)
 {
-	(*conj)->len *= -1;
-	while ((*conj)->prev)
-		(*conj) = (*conj)->prev;
-	ft_reset_graf(node, cuant);
+	int		tmp;
+	
+	if (tail_head[0])
+		*conj = tail_head[0];
+	tmp = 0;
+	if (!(*cuant - 1) || tail_head[1]->path->node->id != tail_head[1]->prev->path->node->id)
+		tmp = tail_head[1]->len;
+	tmp < 0 ? tmp *= -1 : tmp;
+	ft_prepare_graf(node, tail_head[0], --(*cuant), 0);
+	tail_head[1] = ft_destroy_path(&tail_head[0]);
+	return (tmp);
+}
+
+void	ft_reset_graf(t_node *node, int *cuant)
+{
+	int	i;
+
 	i = 0;
-}
-
-void ft_no_path(t_map **conj, t_map **prev, t_node *node, int cuant)
-{
-	(*conj) = *prev;
-	*prev = NULL;
-	ft_prepare_graf(node, (*conj), cuant, 0);
-	if (cuant)
-		ft_destroy_path((*conj), cuant + 1);
-}
-
-int	ft_prepare_next_path(t_map **conj, t_node *node, int cuant, t_map **prev)
-{
-	ft_prepare_graf(node, *conj, cuant, 1);
-	(*prev) = *conj;
-	*conj = (*conj)->next;
-	return (0);
+	while (node)
+	{
+		node->ihbt = 0;
+		node = node->next;
+	}
+	*cuant = 0;
 }

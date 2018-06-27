@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 11:23:37 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/27 00:51:23 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/27 13:03:56 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,15 +119,17 @@ t_map	*ft_search_paths2(t_node *start, int *end, int *max)
 	t_path	*bfs;
 	int		len;
 	t_map	*map;
+	int		tmp_end;
 
-	*end = 0;
+	tmp_end = 0;
 	if (!(bfs = (t_path *)ft_memalloc(1000 * sizeof(t_path))))
 		ft_error("Error malloc ft_search_paths2\n");
 	bfs[0].node = start;
 	bfs[0].node->ihbt = 1;
 	bfs[0].prev = NULL;
 	len = 0;
-	map = searcher_core(bfs, *max, len, end);
+	map = searcher_core(bfs, *max, len, &tmp_end);
+	*end += tmp_end;
 	*max = 0;
 	return (map);
 }

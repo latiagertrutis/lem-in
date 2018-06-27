@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/17 08:12:53 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/26 12:02:23 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/27 11:16:17 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_map_lector(t_map *map, t_node *graf)
 		}
 		
 	}
-	else
+	else if (graf)
 	{
 		while (graf)
 		{

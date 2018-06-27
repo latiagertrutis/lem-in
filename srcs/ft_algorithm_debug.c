@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 18:35:46 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/26 23:30:26 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/27 12:52:50 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,40 +62,34 @@ static t_map		*prepare_graf(t_node *node, t_map *map, int pos, int mode)
 	
 	return (tmp);
 }
-t_map	*ft_destroy_path(t_map *map, const int n)
+t_map	*ft_destroy_path(t_map **map)
 {
-	int		i;
 	t_path	*aux;
-	t_map	*prev;
-	t_map	*next;
+	t_map	*tmp;
+	t_map	*tmp2;
 
-	i = 0;
-	while (i < n - 1 && map)
+	tmp2 = *map;
+	while ((*map)->next)
+		(*map) = (*map)->next;
+	while ((*map)->path)
 	{
-		map = map->next;
-		i++;
+		aux = (*map)->path->next;
+		free((*map)->path);
+		(*map)->path = aux;
 	}
-	next = map->next;
-	prev = map->prev;
-	while (map->path)
+	if ((*map)->prev)
 	{
-		aux = map->path->next;
-		free(map->path);
-		map->path = aux;
+		(*map)->prev->next = NULL;
+		tmp = (*map)->prev;
 	}
-	if (map->prev && map->next)
+	else
 	{
-		map->prev->next = map->next;
-		map->next->prev = map->prev;
+		tmp = NULL;
+		tmp2 = NULL;
 	}
-	else if (map->prev && !map->next)
-		map->prev->next = map->next;
-	else if (!map->prev && map->next)
-		map->next->prev = map->prev;
-	next = map->prev;
-	free(map);
-	map = NULL;
-	return (next);
+	free((*map));
+	(*map) = tmp2;
+	return (tmp);
 }
 
 static void	reset_graf(t_node *node, int *cuant)
@@ -111,7 +105,7 @@ static void	reset_graf(t_node *node, int *cuant)
 	*cuant = 0;
 }
 
-t_map	**ft_algorithm(t_data *data, t_node *node)
+t_map	**ft_algorithm(t_data *data, t_node *node, int max)
 {
 	t_map	**conj;
 	t_map	*prev;
@@ -123,11 +117,8 @@ t_map	**ft_algorithm(t_data *data, t_node *node)
 	int		tmp;
 	int		cuant;
 	int		tmp_cuant;
-	int		max;
 
 	prev = NULL;
-	if (!(max = ft_min(data->start->n_links, data->end->n_links)))
-		ft_error("Start y Exit no unidos\n");
 	conj = (t_map **)ft_memalloc(sizeof(t_map *) * (max + 1));
 //	cuant = (int *)ft_memalloc(sizeof(int) * (data->start->n_links + 1));
 //	cuant[data->start->n_links] = -1;
@@ -137,6 +128,7 @@ t_map	**ft_algorithm(t_data *data, t_node *node)
 	cuant = 0;
 	j = max;
 	tail = NULL;
+	head = NULL;
 	ft_printf("Debo tener %i conjuntos\n", max);
 	while (i < data->start->n_links && i >= 0 && j > 0)
 	{
@@ -159,12 +151,16 @@ t_map	**ft_algorithm(t_data *data, t_node *node)
 //			tail = NULL;
 			//		if (tail && tail->prev)
 //			{
+			if (tail->prev)
+			{
 				ft_printf("el inicio de tail es %s y el de lanterior es %s\n", tail->path->node->name, tail->prev->path->node->name);
-				if (tail->path->node->id != tail->prev->path->node->id)
-				{
-					if ((tmp = tail->len) < 0)
-						tmp *= -1;
-				}
+			}
+			
+			if (!(cuant - 1) || tail->path->node->id != tail->prev->path->node->id)
+			{
+				if ((tmp = tail->len) < 0)
+					tmp *= -1;
+			}
 //			}
 			else
 				tmp = 0;
@@ -172,14 +168,17 @@ t_map	**ft_algorithm(t_data *data, t_node *node)
 			prepare_graf(node, conj[max - j], --cuant, 0);
 //			if (cuant)
 //			{
-				ft_printf("Borro el camino %i\n", cuant);
-				ft_printf("ANTES \n");
-				ft_map_lector(conj[max - j], NULL);
-				tail = ft_destroy_path(conj[max - j], cuant + 1);
-				ft_printf("Tras borrar la cola esta en:\n");
+			ft_printf("Borro el camino %i\n", cuant);
+			ft_printf("ANTES \n");
+			ft_map_lector(conj[max - j], NULL);
+			tail = ft_destroy_path(&head);
+			ft_printf("Tras borrar la cola esta en:\n");
+			if (tail)
+			{
 				show_path(tail->path);
-				ft_printf("DESPUES \n");
-				ft_map_lector(conj[max - j], NULL);
+			}
+			ft_printf("DESPUES \n");
+			ft_map_lector(head, NULL);
 //			}
 //			i--;
 //			for(t_node *tmp = node; tmp; tmp = tmp->next)
@@ -187,7 +186,7 @@ t_map	**ft_algorithm(t_data *data, t_node *node)
 //			ft_error("No paths\n");
 		}
 		ft_printf("He encontrado %i caminos y tenia %i los que he encontrado son:\n", tmp_cuant, cuant);
-		ft_map_lector(conj[max - j],NULL);
+		ft_map_lector(head,NULL);
 		ft_printf("\n\n");
 		
 		data->start->links[i]->start = 0;
@@ -203,16 +202,19 @@ t_map	**ft_algorithm(t_data *data, t_node *node)
 			k = 0;
 			ft_printf("He completado el conjunto %i\n", max - j);
 			conj[max - j]->len *= -1;
-			if (prev)
+			if (!head)
+				head = conj[max - j];
+			if (tail)
 			{
-				prev->next = conj[max - j];
-				conj[max - j]->prev = prev;
+				tail->next = conj[max - j];
+				conj[max - j]->prev = tail;
 			}
-			while (conj[max - j]->prev)
-			{
-				ft_printf("Rebobino\n");
-				conj[max - j] = conj[max - j]->prev;
-			}
+			/* while (conj[max - j]->prev) */
+			/* { */
+			/* 	ft_printf("Rebobino\n"); */
+			/* 	conj[max - j] = conj[max - j]->prev; */
+			/* } */
+			conj[max - j] = head;
 			ft_putstr("{{{{\n");
 			ft_map_lector(conj[max - j], NULL);
 			ft_putstr("}}}}\n");
@@ -235,11 +237,26 @@ t_map	**ft_algorithm(t_data *data, t_node *node)
 			i++;
 			if (!head)
 				head = conj[max - j];
-			if (prev)
+			/* ft_printf("Tail: \n"); */
+			/* if (tail) */
+			/* 	show_path(tail->path); */
+			/* else */
+			/* 	ft_printf("NULO\n"); */
+			/* ft_printf("Head: \n"); */
+			/* if (head) */
+			/* 	show_path(head->path); */
+			/* else */
+			/* 	ft_printf("NULO\n"); */
+			/* ft_printf("Conj: \n"); */
+			/* if(conj[max - j]) */
+			/* 	show_path(conj[max - j]->path); */
+			/* else */
+			/* 	ft_printf("NULO\n"); */
+			if (tail && head != conj[max - j])
 			{
 				ft_printf("\n\n\n");
 				tail->next = conj[max - j];
-				ft_printf("Voy a poner el nodo %s detras\n", prev->path->node->name);
+				//			ft_printf("Voy a poner el nodo %s detras\n", tail->path->node->name);
 				conj[max - j]->prev = tail;
 				ft_map_lector(head, NULL);
 //				head = conj[max - j];
