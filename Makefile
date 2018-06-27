@@ -6,7 +6,7 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/06/27 16:13:54 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/06/27 16:24:45 by jagarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,12 +20,11 @@ LECTOR_FUNCS =	main.c \
 				ft_reader.c\
 				ft_line_error.c \
 				ft_map_lector.c \
-				ft_depure_graf.c \
 				ft_check_number_of_ants.c \
 				check_comment_line.c \
 				ft_ini_node.c \
 				ft_set_links.c \
-				ft_search_paths2.c \
+				ft_search_paths.c \
 				ft_algorithm.c \
 				ft_prepare_conjunts.c \
 				ft_abs_double.c \
@@ -33,20 +32,22 @@ LECTOR_FUNCS =	main.c \
 				ft_cuantity_of_ants.c \
 				ft_solution.c \
 				ft_distribute_ants.c \
-				ft_depure_graf2.c \
+				ft_depure_graf.c \
 				algorithm_funcs1.c \
-				algorithm_funcs2.c
+				algorithm_funcs2.c \
+				searcher_funcs.c
 
 ALGO_FUNCS =	main.c \
+				algorithm_funcs2.c \
+				algorithm_funcs1.c \
 				ft_reader.c\
 				ft_line_error.c \
 				ft_map_lector.c \
-				ft_depure_graf.c \
 				ft_check_number_of_ants.c \
 				check_comment_line.c \
 				ft_ini_node.c \
 				ft_set_links.c \
-				ft_search_paths2.c \
+				ft_search_paths.c \
 				ft_prepare_conjunts.c \
 				ft_abs_double.c \
 				ft_solve_system.c \
@@ -54,7 +55,8 @@ ALGO_FUNCS =	main.c \
 				ft_distribute_ants.c \
 				ft_solution.c \
 				ft_algorithm_debug.c \
-				ft_depure_graf2.c
+				ft_depure_graf.c \
+				searcher_funcs.c
 
 OBJ_DIR = objects/
 LIBFT_DIR = libft/

@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 18:35:46 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/27 12:52:50 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/27 17:00:15 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,35 +62,35 @@ static t_map		*prepare_graf(t_node *node, t_map *map, int pos, int mode)
 	
 	return (tmp);
 }
-t_map	*ft_destroy_path(t_map **map)
-{
-	t_path	*aux;
-	t_map	*tmp;
-	t_map	*tmp2;
+/* t_map	*ft_destroy_path(t_map **map) */
+/* { */
+/* 	t_path	*aux; */
+/* 	t_map	*tmp; */
+/* 	t_map	*tmp2; */
 
-	tmp2 = *map;
-	while ((*map)->next)
-		(*map) = (*map)->next;
-	while ((*map)->path)
-	{
-		aux = (*map)->path->next;
-		free((*map)->path);
-		(*map)->path = aux;
-	}
-	if ((*map)->prev)
-	{
-		(*map)->prev->next = NULL;
-		tmp = (*map)->prev;
-	}
-	else
-	{
-		tmp = NULL;
-		tmp2 = NULL;
-	}
-	free((*map));
-	(*map) = tmp2;
-	return (tmp);
-}
+/* 	tmp2 = *map; */
+/* 	while ((*map)->next) */
+/* 		(*map) = (*map)->next; */
+/* 	while ((*map)->path) */
+/* 	{ */
+/* 		aux = (*map)->path->next; */
+/* 		free((*map)->path); */
+/* 		(*map)->path = aux; */
+/* 	} */
+/* 	if ((*map)->prev) */
+/* 	{ */
+/* 		(*map)->prev->next = NULL; */
+/* 		tmp = (*map)->prev; */
+/* 	} */
+/* 	else */
+/* 	{ */
+/* 		tmp = NULL; */
+/* 		tmp2 = NULL; */
+/* 	} */
+/* 	free((*map)); */
+/* 	(*map) = tmp2; */
+/* 	return (tmp); */
+/* } */
 
 static void	reset_graf(t_node *node, int *cuant)
 {
@@ -136,7 +136,7 @@ t_map	**ft_algorithm(t_data *data, t_node *node, int max)
 		data->start->links[i]->start = 0x1;
 		ft_printf("El proximo camino debera ser menor de %i\n", tmp);
 //		if (!(conj[max - j] = ft_search_paths2(data->start->links[i], cuant + i, tmp)))
-		if (!(conj[max - j] = ft_search_paths2(data->start->links[i], &tmp_cuant, &tmp)))
+		if (!(conj[max - j] = ft_search_paths(data->start->links[i], &tmp_cuant, &tmp)))
 		{
 			ft_printf("No he encontrado paths cuant vale %i\n",cuant);
 			if (!i)
@@ -264,7 +264,7 @@ t_map	**ft_algorithm(t_data *data, t_node *node, int max)
 			ft_putstr("[[[[\n");
 			ft_map_lector(head, NULL);
 			ft_putstr("]]]]\n");			
-			tail = prepare_graf(node, head, cuant - 1, 1);
+			tail = ft_prepare_graf(node, head, cuant - 1, 1);
 			ft_printf("La cola es:\n");
 			show_path(tail->path);
 //			prev = conj[max - j];

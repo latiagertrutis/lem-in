@@ -1,109 +1,122 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_depure_graf.c                                   :+:      :+:    :+:   */
+/*   ft_search_paths2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/13 08:18:55 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/24 23:12:43 by jagarcia         ###   ########.fr       */
+/*   Created: 2018/06/22 11:23:37 by jagarcia          #+#    #+#             */
+/*   Updated: 2018/06/27 16:22:57 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "lem-in.h"
 
-static void		move_links(t_node *graf, int pos)
+/* static t_path	*realoj(t_path *src, int len) */
+/* { */
+/* 	t_path *new; */
+
+/* 	if (!(new = (t_path *)ft_memalloc(sizeof(t_path) * (len + 1001)))) */
+/* 		ft_error("Error malloc en realoj\n"); */
+/* 	while (len) */
+/* 	{ */
+/* 		new[len] = src[len]; */
+/* 		len--; */
+/* 	} */
+/* 	return (new); */
+/* } */
+
+static t_path	*ini_bfs(int *i, int *len, t_node *start)
 {
-	while (pos + 1 < graf->n_links)
-	{
-		graf->links[pos] = graf->links[pos + 1];
-		pos++;
-	}
-	graf->links[pos] = NULL;
-	graf->n_links--;
+	t_path *bfs;
+	
+	if (!(bfs = (t_path *)ft_memalloc(1000 * sizeof(t_path))))
+		ft_error("Error malloc ft_search_paths2\n");
+	bfs[0].node = start;
+	bfs[0].node->ihbt = 1;
+	bfs[0].prev = NULL;
+	*i = -1;
+	*len = 0;
+	return (bfs);
 }
 
-static void		kill_branch(t_node *graf)
+static int		search_path(t_node *start)
 {
-	int	i;
-	t_node	*tmp;
-
-	while (graf->n_links == 1)
-	{
-		graf->n_links--;
-		tmp = graf;
-		graf = graf->links[0];
-	}
-	i = 0;
-	while (graf->links[i]->id != tmp->id)
-		i++;
-	move_links(graf, i);
-}
-
-static int		check_useless_nodes(t_node *graf)
-{
-	t_node	*tmp;
-	t_node	*tmp2;
+	t_path	*bfs;
+	int		len;
 	int		i;
 	int		j;
 
-	tmp = graf->links[0];
-	tmp2 = graf->links[1];
-	if ((tmp->start && tmp2->end) || (tmp->end && tmp2->start))
-		return (0);
-	i = 0;
-	while (i < tmp->n_links)
+	bfs = ini_bfs(&i, &len, start);
+	ft_printf("voy a comprobar %s\n", start->name);
+	while (++i <= len)
 	{
-		j = 0;
-		while (j < tmp2->n_links && tmp->links[i]->id != tmp2->id)
+		j = -1;
+		while(++j < bfs[i].node->n_links)
 		{
-			if (tmp->links[i]->id == tmp2->links[j]->id && tmp->links[i]->id
-			    != graf->id && tmp->links[i]->n_links == 2 &&
-			    tmp2->links[j]->id != tmp->id)
+			if (!bfs[i].node->links[j]->ihbt && !bfs[i].node->links[j]->start)
 			{
-				tmp->links[i]->n_links = 0;
-				move_links(tmp, i);
-				move_links(tmp2, j);
-				return (1);
+//				ft_printf("Estoy en %s y voy a anyadir %s\n", bfs[i].node->name, bfs[i].node->links[j]->name);
+				if (!((len + 1) % ALGORITHM_BUFF))
+					bfs = ft_realoj(bfs, len);
+				bfs[++len].node = bfs[i].node->links[j];
+				bfs[len].prev = bfs + i;
+				if (bfs[len].node->end)
+				{
+					free(bfs);
+					return (1);
+				}
+				bfs[len].node->ihbt = 1;
 			}
-			j++;
 		}
-		i++;
 	}
+	free(bfs);
 	return (0);
 }
 
-void	ft_depure_graf(t_node *graf)
+static void	cut_and_reset(t_node *true_start, int pos, t_node *node, int reset)
 {
-	t_node *head;
+	if (reset)
+	{
+		while (node)
+		{
+			node->ihbt = 0;
+			node = node->next;
+		}
+	}
+	else
+	{
+		while (pos + 1 < true_start->n_links)
+		{
+			true_start->links[pos] = true_start->links[pos + 1];
+			pos++;
+		}
+		true_start->n_links--;
+		true_start->links[pos] = NULL;
+	}
+}
 
-	head = graf;
-	while (graf)
+void	ft_depure_graf(t_data *data, t_node *node)
+{
+	t_node	*start;
+	int		i;
+
+	i = 0;
+	while (i < data->start->n_links)
 	{
-		if (!(graf->start) && !(graf->end) && graf->n_links == 2)
+		start = data->start->links[i];
+		start->start = 0x1;
+		start->ihbt = 1;
+		if (!(search_path(start)))
 		{
-			if (check_useless_nodes(graf))
-				graf = head;
+//			ft_printf("Voy a romper la union %s\n", start->name);
+			cut_and_reset(data->start, i, NULL, 0);
+			i = 0;
 		}
-		graf = graf->next;
+		cut_and_reset(NULL, 0, node, 1);
+		start->start = 0;
+		i++;
 	}
-	graf = head;
-	while (graf)
-	{
-		if (!graf->start && !graf->end && graf->n_links == 1)
-		{
-			kill_branch(graf);
-			graf = head;
-		}
-		graf = graf->next;
-	}
-	graf = head;
-	while (graf)
-	{
-		if (!(graf->start) && !(graf->end) && graf->n_links == 2)
-		{
-			if (check_useless_nodes(graf))
-				graf = head;
-		}
-		graf = graf->next;
-	}
+	if (!data->start->n_links)
+		ft_error("Start no unido con end\n");
 }

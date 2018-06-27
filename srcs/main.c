@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/08 20:32:11 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/27 15:57:58 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/27 16:15:22 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		main(int argc, char **argv)
 
 
 	ft_map_lector(NULL, node);
-	ft_depure_graf2(&data, node);
+	ft_depure_graf(&data, node);
 	ft_printf("MAP DEPURED \n");
 	ft_map_lector(NULL, node);
 	int min = ft_min(data.end->n_links, data.start->n_links);

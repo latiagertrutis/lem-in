@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 13:45:50 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/27 13:47:37 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/27 16:33:12 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,16 @@ static int		compare_path(const t_node *node, t_path *path)
 	return (0);
 }
 
+static void		show_path(t_path *path)
+{
+	while (path)
+	{
+		ft_printf("%s - ", path->node->name);
+		path = path->next;
+	}
+	ft_printf("\n");
+}
+
 t_map		*ft_prepare_graf(t_node *node, t_map *map, int pos, int mode)
 {
 	t_path *path;
@@ -64,7 +74,8 @@ t_map		*ft_prepare_graf(t_node *node, t_map *map, int pos, int mode)
 		map = map->next;
 		pos--;
 	}
-	path = map->path;
+	path = map->path;	
+	show_path(path);
 	map->len *= -1;
 	while (node)
 	{
