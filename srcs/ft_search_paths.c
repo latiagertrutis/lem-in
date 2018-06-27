@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 11:23:37 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/27 15:52:42 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/27 16:30:47 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ static t_map	*make_path(t_path *bfs, int end, int len)
 	return (head);
 }
 
-
-
 static t_map	*searcher_core(t_path *bfs, int max, int len, int *end)
 {
 	int	i[3];
@@ -71,7 +69,7 @@ static t_map	*searcher_core(t_path *bfs, int max, int len, int *end)
 	return (make_path(bfs, *end, len));
 }
 
-t_map	*ft_search_paths2(t_node *start, int *end, int *max)
+t_map	*ft_search_paths(t_node *start, int *end, int *max)
 {
 	t_path	*bfs;
 	int		len;
