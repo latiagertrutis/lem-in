@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/08 20:32:11 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/27 18:04:48 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/27 18:06:25 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,15 @@ int		main(int argc, char **argv)
 	paths = ft_algorithm(&data, node, min);
 	ft_prepare_conjunts(paths, ft_min(data.start->n_links, data.end->n_links));
 //	paths = ft_search_paths2(&data);
-//	ft_printf("PATHS GENERATE \n");
+	ft_printf("PATHS GENERATE \n");
 	i = 0;
 //	ft_printf("min es: %d\n", min);
-//	while (i < min)
-//	{
-//		ft_printf("Conjunto %i\n", i);
-//		ft_map_lector(paths[i], NULL);
-//		i++;
-//	}
+	while (i < min)
+	{
+		ft_printf("Conjunto %i\n", i);
+		ft_map_lector(paths[i], NULL);
+		i++;
+	}
 //	ft_printf("\nlen es: %d\n", i);
 	ft_distribute_ants(&data, paths, min);
 //	ft_putstr(data.start->name);
