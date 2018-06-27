@@ -6,7 +6,7 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/06/27 13:51:28 by jagarcia         ###   ########.fr        #
+#    Updated: 2018/06/27 14:45:20 by jagarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,6 @@ LECTOR_FUNCS =	main.c \
 				ft_line_error.c \
 				ft_map_lector.c \
 				ft_depure_graf.c \
-				ft_search_paths.c \
 				ft_check_number_of_ants.c \
 				check_comment_line.c \
 				ft_ini_node.c \
