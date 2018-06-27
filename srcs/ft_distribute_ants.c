@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 14:02:47 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/27 15:58:06 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/27 16:17:03 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,32 +94,14 @@ void			ft_distribute_ants(t_data *data, t_map **conjs, int len)
 	int		i;
 
 	pos = choose_conj(conjs, len, data->n_ants);
-	ft_printf("\npos es: %d\n", pos);
 	mat = allocate_matrix(pos + 1);
 	matrix_gen(conjs[pos], pos + 1, mat);
 	i = 0;
 	while (i < pos + 1)
 		mat[pos + 1][i++] = 1.0;
 	mat[pos + 1][pos + 1] = (double)data->n_ants;
-	for(i = 0; i < pos + 2; i++)
-	{
-		for(int j = 0; j < pos + 2; j++)
-		{
-			ft_printf("%f ", (mat)[i][j]);
-		}
-		ft_printf("\n");
-	}
 	if (!ft_solve_system(mat, pos + 2, pos + 2))
 		ft_error("No solution found");
-		ft_printf("\n");
-	for(i = 0; i < pos + 2; i++)
-	{
-		for(int j = 0; j < pos + 2; j++)
-		{
-			ft_printf("%f ", (mat)[i][j]);
-		}
-		ft_printf("\n");
-	}
 	ft_solution(data, conjs[pos], mat, pos + 2);
 }
 /*
