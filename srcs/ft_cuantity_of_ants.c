@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/18 19:51:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/27 15:43:06 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/27 18:02:17 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	node_sumatory(t_map *conj, int len)
 
 	i = 0;
 	sum = 0;
-	while (i < len)
+	while (i < len && conj)
 	{
 		sum += conj->len;
 		conj = conj->next;
