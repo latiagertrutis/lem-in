@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 21:52:24 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/26 18:42:37 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/27 14:40:13 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char		*assign_color(int ant)
 	char	*aux;
 	int		len;
 
-	aux = ft_itoa((ant * 4) % 256);
+	aux = ft_itoa(ant % 256);
 	len = ft_strlen(aux);
 	str = ft_strjoin("{C:", aux);
 	free(aux);
