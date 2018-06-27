@@ -6,14 +6,17 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/26 15:15:45 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/06/26 15:45:58 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/06/27 17:23:21 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-for n in {1..1}
+for n in {1..10}
 do
-	ants=$(jot -r 1 1 10);
-	nodes=$(jot -r 1 1 100);
+	ants=$(jot -r 1 1 100);
+	nodes=$(jot -r 1 1 1000);
 	./lem-in_gen $ants $nodes > prueba1.map
+	echo "---------------------------------principio----------------------------------------"
+	cat prueba1.map
+	echo "---------------------------------fin----------------------------------------"
 	./lem-in prueba1.map
 done
