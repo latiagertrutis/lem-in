@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:50:53 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/27 15:57:00 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/27 17:26:38 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "lem-in.h"
@@ -44,7 +44,7 @@ void		ft_prepare_next_node(t_map **conj, t_path **tmp, int *end,
 
 int			ft_add_node(t_path **bfs, int *len, int i[3])
 {
-	if (!((*len + 1) % 1000))
+	if (!((*len + 1) % ALGORITHM_BUFF))
 		(*bfs) = ft_realoj(*bfs, *len);
 	(*bfs)[++(*len)].node = (*bfs)[i[0]].node->links[i[1]];
 	(*bfs)[*len].prev = (*bfs) + i[0];

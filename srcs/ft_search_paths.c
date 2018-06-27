@@ -6,13 +6,11 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 11:23:37 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/27 16:30:47 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/27 17:23:14 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
-
-
 
 static t_map	*make_path(t_path *bfs, int end, int len)
 {
@@ -48,8 +46,9 @@ static t_map	*searcher_core(t_path *bfs, int max, int len, int *end)
 	int	i[3];
 
 	i[0] = -1;
-	while (!bfs[++i[0]].node->end)
+	while (!*end)
 	{
+		i[0]++;
 		i[1] = -1;
 		i[2] = 0;
 		if (max == bfs[i[0]].node->ihbt + 1)
@@ -59,8 +58,7 @@ static t_map	*searcher_core(t_path *bfs, int max, int len, int *end)
 		while(++i[1] < bfs[i[0]].node->n_links && (i[2] ==
 				bfs[i[0]].node->n_links || !i[2]))
 		{
-			if (!bfs[i[0]].node->links[i[1]]->ihbt &&
-			    !bfs[i[0]].node->links[i[1]]->start)
+			if (!bfs[i[0]].node->links[i[1]]->ihbt)
 				*end += ft_add_node(&bfs, &len, i);
 		}
 		if (i[0] + 1 > len)

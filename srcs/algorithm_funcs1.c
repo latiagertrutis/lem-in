@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 13:45:50 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/27 16:33:12 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/27 17:04:45 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,9 @@ t_map		*ft_prepare_graf(t_node *node, t_map *map, int pos, int mode)
 	map->len *= -1;
 	while (node)
 	{
-		if ((node->ihbt && !mode && (node->ihbt != -1 || compare_path(node, path))) || node->end)
+		if (node->start)
+			node->ihbt = 0;
+		else if ((node->ihbt && !mode && (node->ihbt != -1 || compare_path(node, path))) || node->end)
 			node->ihbt = 0;
 		else if (mode && node->ihbt != -1 && compare_path(node, path))
 			node->ihbt = -1;
