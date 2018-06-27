@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 13:45:50 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/27 17:04:45 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/27 17:51:16 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_map		*ft_prepare_graf(t_node *node, t_map *map, int pos, int mode)
 		pos--;
 	}
 	path = map->path;	
-	show_path(path);
+//	show_path(path);
 	map->len *= -1;
 	while (node)
 	{

@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 21:47:21 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/27 10:54:59 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/27 17:59:17 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	ft_prepare_conjunts(t_map **paths, int max)
 		paths_tmp = paths[i];
 		while (paths_tmp)
 		{
-			ft_printf("len = %i\n", paths_tmp->len);
-			show_path(paths_tmp->path);
+//			ft_printf("len = %i\n", paths_tmp->len);
+//			show_path(paths_tmp->path);
 			if (paths_tmp->len < 0)
 			{
 				paths_tmp->len *= -1;
@@ -44,7 +44,7 @@ void	ft_prepare_conjunts(t_map **paths, int max)
 			}
 			else
 			{
-				ft_printf("borro\n");
+//				ft_printf("borro\n");
 				while (paths_tmp->path)
 				{
 					tmp = paths_tmp->path->next;
@@ -74,7 +74,7 @@ void	ft_prepare_conjunts(t_map **paths, int max)
 				free(map_tmp);
 			}
 		}
-		ft_printf("avanzo\n");
+//		ft_printf("avanzo\n");
 		i++;
 	}
 } 

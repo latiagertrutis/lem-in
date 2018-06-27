@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 11:23:37 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/27 16:22:57 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/27 17:54:21 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int		search_path(t_node *start)
 	int		j;
 
 	bfs = ini_bfs(&i, &len, start);
-	ft_printf("voy a comprobar %s\n", start->name);
+//	ft_printf("voy a comprobar %s\n", start->name);
 	while (++i <= len)
 	{
 		j = -1;
