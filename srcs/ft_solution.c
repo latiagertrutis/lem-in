@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 21:52:24 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/27 17:37:53 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/27 17:45:41 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ static void		lagging_ants(t_data *data, int *ant, t_map *conj)
 	{
 		(*ant)++;
 		ft_printf("%sL%d-%s ", assign_color(*ant),
-								*ant, conj->path->node->name);
-		conj->path->node->ants = *ant;
+								*ant, conj->path->next->node->name);
+		conj->path->next->node->ants = *ant;
 		conj = conj->next;
 	}
 }
@@ -74,7 +74,7 @@ static int		move_ants(t_data *data, t_map *conj)
 	while (conj)
 	{
 		path = conj->tail->prev;
-		while (path && !path->node->start)
+		while (path)
 		{
 			if (path->node->ants)
 			{
