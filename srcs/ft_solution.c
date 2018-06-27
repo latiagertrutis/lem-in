@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 21:52:24 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/27 14:40:13 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/27 17:34:05 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ static int		send_ants(int dim, t_map *conj, double **mat, int *ant)
 		{
 			(*ant)++;
 			ft_printf("%sL%d-%s ", assign_color(*ant),
-									*ant, conj->path->node->name);
+									*ant, conj->path->next->node->name);
 			mat[i][dim - 1]--;
-			conj->path->node->ants = *ant;
+			conj->path->next->node->ants = *ant;
 			centi = 1;
 		}
 		conj = conj->next;
@@ -74,7 +74,7 @@ static int		move_ants(t_data *data, t_map *conj)
 	while (conj)
 	{
 		path = conj->tail->prev;
-		while (path)
+		while (path && !path->node->start)
 		{
 			if (path->node->ants)
 			{
