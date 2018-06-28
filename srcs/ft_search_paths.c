@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 11:23:37 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/27 23:09:13 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/27 23:32:54 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,10 @@ static t_map	*searcher_core(t_path *bfs, int max, int len, int *end)
 		i[0]++;
 		i[1] = -1;
 		i[2] = 0;
-		if (max && max == bfs[i[0]].node->ihbt + 1)
-		{
-			ft_printf("El camino es tan largo como max\n");
-			while (i[2] < bfs[i[0]].node->n_links)
-			{
-				while!bfs[i[0]].node->links[i[2]]->end)
+		if (max == bfs[i[0]].node->ihbt + 1)
+			while (i[2] < bfs[i[0]].node->n_links &&
+			       !bfs[i[0]].node->links[i[2]]->end)
 				i[2]++;
-			}
-		}
 		while(++i[1] < bfs[i[0]].node->n_links && (i[2] ==
 				bfs[i[0]].node->n_links || !i[2]))
 		{
