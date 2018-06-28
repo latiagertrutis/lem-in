@@ -6,13 +6,14 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 13:48:05 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/27 22:07:20 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/28 23:15:14 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
 
-int		ft_finish_conjunt(t_map *(tail_head[2]), t_map **conj, t_node *node, int *cuant)
+int		ft_finish_conjunt(t_map *(tail_head[2]), t_map **conj,
+								t_node *node, int *cuant)
 {
 	if (!tail_head[0])
 		tail_head[0] = *conj;
@@ -30,17 +31,8 @@ int		ft_finish_conjunt(t_map *(tail_head[2]), t_map **conj, t_node *node, int *c
 	return (0);
 }
 
-static void		show_path(t_path *path)
-{
-	while (path)
-	{
-		ft_printf("%s - ", path->node->name);
-		path = path->next;
-	}
-	ft_printf("\n");
-}
-
-int		ft_prepare_next(t_map *(tail_head[2]), t_map **conj, int cuant, t_node *node)
+int		ft_prepare_next(t_map *(tail_head[2]), t_map **conj,
+							int cuant, t_node *node)
 {
 	if (!tail_head[0])
 		tail_head[0] = *conj;

@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/17 05:43:50 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/17 06:23:33 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/28 23:23:56 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void		ft_putnbr_error(int i)
 	}
 }
 
-void				ft_line_error(int n, char *err)
+void			ft_line_error(int n, char *err)
 {
 	if (!err)
 		perror(err);

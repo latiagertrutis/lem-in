@@ -1,20 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_abs_double.c                                    :+:      :+:    :+:   */
+/*   check_link_format.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/24 20:25:30 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/28 23:14:08 by mrodrigu         ###   ########.fr       */
+/*   Created: 2018/06/29 00:02:17 by mrodrigu          #+#    #+#             */
+/*   Updated: 2018/06/29 00:02:46 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
 
-double	ft_abs_double(double n)
+int		check_link_format(char *line)
 {
-	if (n < 0.0)
-		return (-n);
-	return (n);
+	int i;
+
+	i = 0;
+	while (line[i] && line[i] != '-')
+	{
+		if (line[i] < 33 || line[i] > 126)
+			return (1);
+		i++;
+	}
+	if (!line[i++])
+		return (1);
+	while (line[i] && line[i] != '-')
+	{
+		if (line[i] < 33 || line[i] > 126)
+			return (1);
+		i++;
+	}
+	return (0);
 }

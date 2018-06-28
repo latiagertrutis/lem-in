@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 11:23:37 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/27 23:32:54 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/28 23:33:55 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ static t_map	*searcher_core(t_path *bfs, int max, int len, int *end)
 		i[2] = 0;
 		if (max == bfs[i[0]].node->ihbt + 1)
 			while (i[2] < bfs[i[0]].node->n_links &&
-			       !bfs[i[0]].node->links[i[2]]->end)
+						!bfs[i[0]].node->links[i[2]]->end)
 				i[2]++;
-		while(++i[1] < bfs[i[0]].node->n_links && (i[2] ==
+		while (++i[1] < bfs[i[0]].node->n_links && (i[2] ==
 				bfs[i[0]].node->n_links || !i[2]))
 		{
 			if (!bfs[i[0]].node->links[i[1]]->ihbt)
@@ -67,7 +67,7 @@ static t_map	*searcher_core(t_path *bfs, int max, int len, int *end)
 	return (make_path(bfs, *end, len));
 }
 
-t_map	*ft_search_paths(t_node *start, int *end, int *max)
+t_map			*ft_search_paths(t_node *start, int *end, int *max)
 {
 	t_path	*bfs;
 	int		len;

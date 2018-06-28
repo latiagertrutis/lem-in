@@ -1,20 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_abs_double.c                                    :+:      :+:    :+:   */
+/*   resize_links.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/24 20:25:30 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/28 23:14:08 by mrodrigu         ###   ########.fr       */
+/*   Created: 2018/06/29 00:04:52 by mrodrigu          #+#    #+#             */
+/*   Updated: 2018/06/29 00:05:14 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
 
-double	ft_abs_double(double n)
+void		resize_links(t_node *n)
 {
-	if (n < 0.0)
-		return (-n);
-	return (n);
+	t_node	**aux;
+	int		i;
+
+	i = 0;
+	if (!(aux = (t_node **)malloc(sizeof(t_node *) * (n->n_links / LINK_BUFF))))
+		ft_error(NULL);
+	while (i < n->n_links)
+	{
+		aux[i] = (n->links)[i];
+		i++;
+	}
+	free(n->links);
+	n->links = aux;
 }

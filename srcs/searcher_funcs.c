@@ -6,15 +6,16 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:50:53 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/27 17:26:38 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/28 23:29:21 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "lem-in.h"
 
 t_path		*ft_new_path(t_node *node, t_path *next, int *len)
 {
 	t_path	*path;
-	
+
 	if (!(path = (t_path *)ft_memalloc(sizeof(t_path))))
 		ft_error("Error malloc ft_new_path\n");
 	path->next = next;

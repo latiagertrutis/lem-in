@@ -6,25 +6,11 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 11:23:37 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/28 12:05:03 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/28 23:25:31 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
-
-/* static t_path	*realoj(t_path *src, int len) */
-/* { */
-/* 	t_path *new; */
-
-/* 	if (!(new = (t_path *)ft_memalloc(sizeof(t_path) * (len + 1001)))) */
-/* 		ft_error("Error malloc en realoj\n"); */
-/* 	while (len) */
-/* 	{ */
-/* 		new[len] = src[len]; */
-/* 		len--; */
-/* 	} */
-/* 	return (new); */
-/* } */
 
 static t_path	*ini_bfs(int *i, int *len, t_node *start)
 {
@@ -48,7 +34,6 @@ static int		search_path(t_node *start)
 	int		j;
 
 	bfs = ini_bfs(&i, &len, start);
-//	ft_printf("voy a comprobar %s\n", start->name);
 	while (++i <= len)
 	{
 		j = -1;
@@ -56,7 +41,6 @@ static int		search_path(t_node *start)
 		{
 			if (!bfs[i].node->links[j]->ihbt && !bfs[i].node->links[j]->start)
 			{
-//				ft_printf("Estoy en %s y voy a anyadir %s\n", bfs[i].node->name, bfs[i].node->links[j]->name);
 				if (!((len + 1) % ALGORITHM_BUFF))
 					bfs = ft_realoj(bfs, len);
 				bfs[++len].node = bfs[i].node->links[j];
@@ -74,7 +58,7 @@ static int		search_path(t_node *start)
 	return (0);
 }
 
-static void	cut_and_reset(t_node *true_start, int pos, t_node *node, int reset)
+static void		cut_and_reset(t_node *true_start, int pos, t_node *node, int reset)
 {
 	if (reset)
 	{
@@ -88,7 +72,6 @@ static void	cut_and_reset(t_node *true_start, int pos, t_node *node, int reset)
 	{
 		while (pos + 1 < true_start->n_links)
 		{
-//			ft_printf("%s ahora es %s\n", true_start->links[pos]->name, true_start->links[pos + 1]->name);
 			true_start->links[pos] = true_start->links[pos + 1];
 			pos++;
 		}
@@ -97,7 +80,7 @@ static void	cut_and_reset(t_node *true_start, int pos, t_node *node, int reset)
 	}
 }
 
-static void	check_double_links(t_node *node)
+static void		check_double_links(t_node *node)
 {
 	int i;
 	int j;
@@ -119,7 +102,7 @@ static void	check_double_links(t_node *node)
 	}
 }
 
-void	ft_depure_graf(t_data *data, t_node *node)
+void			ft_depure_graf(t_data *data, t_node *node)
 {
 	t_node	*start;
 	int		i;
@@ -137,7 +120,6 @@ void	ft_depure_graf(t_data *data, t_node *node)
 		start->start = 0x1;
 		if (!(search_path(start)))
 		{
-//			ft_printf("Voy a romper la union %s\n", start->name);
 			cut_and_reset(data->start, i, NULL, 0);
 			i = 0;
 		}
@@ -161,7 +143,6 @@ void	ft_depure_graf(t_data *data, t_node *node)
 		start->start = 0x1;
 		if (!(search_path(start)))
 		{
-//			ft_printf("Voy a romper la union %s\n", start->name);
 			cut_and_reset(data->end, i, NULL, 0);
 			i = 0;
 		}

@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 12:45:32 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/20 12:57:12 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/29 00:05:52 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,6 @@ static	t_node	*search_node(t_node *head, char *line, t_data *data)
 	return (head);
 }
 
-static void resize_links(t_node *n)
-{
-	t_node	**aux;
-	int 	i;
-
-	i = 0;
-	if (!(aux = (t_node **)malloc(sizeof(t_node *) * (n->n_links / LINK_BUFF))))
-		ft_error(NULL);
-	while (i < n->n_links)
-	{
-		aux[i] = (n->links)[i];
-		i++;
-	}
-	free(n->links);
-	n->links = aux;
-}
-
 static void		append_link(t_node *a, t_node *b)
 {
 	if (a->n_links >= LINK_BUFF)
@@ -48,7 +31,6 @@ static void		append_link(t_node *a, t_node *b)
 	(a->links)[a->n_links] = b;
 	a->n_links++;
 }
-
 
 static	void	ft_link(char *s1, char *s2, t_node *head, t_data *data)
 {
@@ -61,29 +43,18 @@ static	void	ft_link(char *s1, char *s2, t_node *head, t_data *data)
 	append_link(aux2, aux);
 }
 
-static int		check_link_format(char *line)
+static int		format_line(char *line)
 {
 	int i;
 
 	i = 0;
-	while (line[i] && line[i] != '-')
-	{
-		if (line[i] < 33 || line[i] > 126)
-			return (1);
+	while (line[i] != '-')
 		i++;
-	}
-	if (!line[i++])
-		return(1);
-	while (line[i] && line[i] != '-')
-	{
-		if (line[i] < 33 || line[i] > 126)
-			return (1);
-		i++;
-	}
-	return (0);
+	line[i] = 0;
+	return (i);
 }
 
-	void	ft_set_links(t_data *data, char *line, t_node *head)
+void			ft_set_links(t_data *data, char *line, t_node *head)
 {
 	int i;
 
@@ -93,17 +64,20 @@ static int		check_link_format(char *line)
 			ft_line_error(data->current_line, "No link found");
 		data->current_line++;
 		if (check_comment_line(data, line, NULL))
-			goto next;
+		{
+			if (get_next_line(data->fd, &line) <= 0)
+				break ;
+			continue ;
+		}
 		else if (check_link_format(line))
 			ft_line_error(data->current_line, "Wrong link format");
-		i = 0;
-		while(line[i++] != '-');
-		line[i - 1] = 0;
+		i = format_line(line);
 		if (!ft_strcmp(line, line + i))
-			ft_line_error(data->current_line, "Some node is linked with himselve");
+			ft_line_error(data->current_line,
+							"Some node is linked with himselve");
 		ft_link(line, line + i, head, data);
 		free(line);
-	next: if (get_next_line(data->fd, &line) <= 0)
+		if (get_next_line(data->fd, &line) <= 0)
 			break ;
 	}
 }

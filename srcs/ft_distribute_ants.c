@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 14:02:47 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/27 17:34:59 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/28 23:22:53 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,7 @@ static void		matrix_gen(t_map *conj, int n_path, double **mat)
 			{
 				mat[k][i] = 1.0;
 				mat[k][j] = -1.0;
-				mat[k][n_path] = mj->len - mi->len;
-				k++;
+				mat[k++][n_path] = mj->len - mi->len;
 				mj = mj->next;
 			}
 		}
