@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 11:23:37 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/28 23:25:31 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/29 18:09:10 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static t_path	*ini_bfs(int *i, int *len, t_node *start)
 {
 	t_path *bfs;
-	
+
 	if (!(bfs = (t_path *)ft_memalloc(1000 * sizeof(t_path))))
 		ft_error("Error malloc ft_search_paths2\n");
 	bfs[0].node = start;
@@ -37,7 +37,7 @@ static int		search_path(t_node *start)
 	while (++i <= len)
 	{
 		j = -1;
-		while(++j < bfs[i].node->n_links)
+		while (++j < bfs[i].node->n_links)
 		{
 			if (!bfs[i].node->links[j]->ihbt && !bfs[i].node->links[j]->start)
 			{
@@ -58,7 +58,8 @@ static int		search_path(t_node *start)
 	return (0);
 }
 
-static void		cut_and_reset(t_node *true_start, int pos, t_node *node, int reset)
+static void		cut_and_reset(t_node *true_start, int pos,
+								t_node *node, int reset)
 {
 	if (reset)
 	{
@@ -93,7 +94,8 @@ static void		check_double_links(t_node *node)
 			j = i + 1;
 			while (j < node->n_links)
 			{
-				if (node->links[i]->id == node->links[j++]->id && ((!node->start || !node->links[i]->end) && (!node->end || !node->links[i]->end)))
+				if (node->links[i]->id == node->links[j++]->id && ((!node->start
+			|| !node->links[i]->end) && (!node->end || !node->links[i]->end)))
 					cut_and_reset(node, i, NULL, 0);
 			}
 			i++;
@@ -110,7 +112,6 @@ void			ft_depure_graf(t_data *data, t_node *node)
 
 	i = 0;
 	check_double_links(node);
-	
 	while (i < data->start->n_links)
 	{
 		j = 0;

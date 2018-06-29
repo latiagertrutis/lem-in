@@ -6,7 +6,7 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/06/27 16:24:45 by jagarcia         ###   ########.fr        #
+#    Updated: 2018/06/29 17:53:19 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,6 @@ CFLAGS = -fsanitize=address
 LECTOR_FUNCS =	main.c \
 				ft_reader.c\
 				ft_line_error.c \
-				ft_map_lector.c \
 				ft_check_number_of_ants.c \
 				check_comment_line.c \
 				ft_ini_node.c \
@@ -35,14 +34,15 @@ LECTOR_FUNCS =	main.c \
 				ft_depure_graf.c \
 				algorithm_funcs1.c \
 				algorithm_funcs2.c \
-				searcher_funcs.c
+				searcher_funcs.c \
+				resize_links.c \
+				check_link_format.c
 
 ALGO_FUNCS =	main.c \
 				algorithm_funcs2.c \
 				algorithm_funcs1.c \
 				ft_reader.c\
 				ft_line_error.c \
-				ft_map_lector.c \
 				ft_check_number_of_ants.c \
 				check_comment_line.c \
 				ft_ini_node.c \

@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/17 05:43:50 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/28 23:23:56 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/29 18:06:53 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,4 @@ void			ft_line_error(int n, char *err)
 		ft_putstr_fd("\e[0m\n", 2);
 	}
 	exit(1);
-	}
+}

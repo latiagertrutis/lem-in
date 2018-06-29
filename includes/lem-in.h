@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 21:05:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/27 16:15:58 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/29 17:54:49 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ t_node				*ft_reader(t_data *data);
 void				ft_line_error(int n, char *err);
 void				ft_depure_graf(t_data *data, t_node *node);
 t_map				*ft_search_paths(t_node *start, int *end, int *max);
-void				ft_map_lector(t_map *map, t_node *graf);
 void				ft_check_number_of_ants(t_data *data, char **line);
 int					check_comment_line(t_data *data, char *line, t_node *node);
 char				*ft_ini_node(t_data *data, t_node *node, char *line);
@@ -97,4 +96,7 @@ t_path				*ft_realoj(t_path *src, int len);
 int					ft_add_node(t_path **bfs, int *len, int i[3]);
 void				ft_prepare_next_node(t_map **conj, t_path **tmp, int *end, t_path *ptr);
 t_path				*ft_new_path(t_node *node, t_path *next, int *len);
+void				resize_links(t_node *n);
+int					check_link_format(char *line);
+
 #endif

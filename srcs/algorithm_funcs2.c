@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 13:48:05 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/28 23:15:14 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/29 17:55:03 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int		ft_finish_conjunt(t_map *(tail_head[2]), t_map **conj,
 		(*conj)->prev = tail_head[1];
 	}
 	*conj = tail_head[0];
-	ft_map_lector(*conj, NULL);
 	tail_head[0] = NULL;
 	tail_head[1] = NULL;
 	ft_reset_graf(node, cuant);

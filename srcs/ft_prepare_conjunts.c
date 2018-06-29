@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 21:47:21 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/28 23:26:28 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/29 18:07:27 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,4 @@ void	ft_prepare_conjunts(t_map **paths, int max)
 		}
 		i++;
 	}
-} 
+}
