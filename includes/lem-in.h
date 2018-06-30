@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 21:05:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/29 17:54:49 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/30 15:56:21 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include "../libft/includes/libft.h"
-#define LINK_BUFF 5000
-#define SET_BUFF 5000
-#define	ALGORITHM_BUFF 1000
+# define LINK_BUFF 5000
+# define SET_BUFF 5000
+# define ALGORITHM_BUFF 1000
 
 typedef struct		s_node
 {
@@ -82,21 +82,28 @@ double				ft_abs_double(double n);
 int					distribute_ants(double **mat, int row, int col);
 void				ft_prepare_conjunts(t_map **paths, int max);
 int					ft_solve_system(double **mat, int row, int col);
-int					ft_cuantity_of_ants(t_map *a, t_map *b, int a_len, int b_len);
+int					ft_cuantity_of_ants(t_map *a, t_map *b, int a_len,
+										int b_len);
 void				ft_distribute_ants(t_data *data, t_map **conjs, int len);
-void				ft_solution(t_data *data, t_map *conj, double **mat, int dim);
+void				ft_solution(t_data *data, t_map *conj, double **mat, int d);
 t_map				*ft_destroy_path(t_map **map);
-int					ft_finish_conjunt(t_map *(tail_head[2]), t_map **conj, t_node *node, int *cuant);
-int					ft_prepare_next(t_map *(tail_head[2]), t_map **conj, int cuant, t_node *node);
+int					ft_finish_conjunt(t_map *(tail_head[2]), t_map **conj,
+										t_node *node, int *cuant);
+int					ft_prepare_next(t_map *(tail_head[2]), t_map **conj,
+										int cuant, t_node *node);
 t_map				*ft_destroy_path(t_map **map);
-t_map				*ft_prepare_graf(t_node *node, t_map *map, int pos, int mode);
-int					ft_no_path(t_node *node, t_map *(tail_head[2]), int *cuant, t_map **conj);
+t_map				*ft_prepare_graf(t_node *node, t_map *map, int p, int mode);
+int					ft_no_path(t_node *node, t_map *(tail_head[2]),
+										int *cuant, t_map **conj);
 void				ft_reset_graf(t_node *node, int *cuant);
 t_path				*ft_realoj(t_path *src, int len);
 int					ft_add_node(t_path **bfs, int *len, int i[3]);
-void				ft_prepare_next_node(t_map **conj, t_path **tmp, int *end, t_path *ptr);
+void				ft_prepare_next_node(t_map **conj, t_path **tmp, int *end,
+										t_path *ptr);
 t_path				*ft_new_path(t_node *node, t_path *next, int *len);
 void				resize_links(t_node *n);
 int					check_link_format(char *line);
+void				ft_cut_and_reset(t_node *true_start, int pos, t_node *node,
+										int reset);
 
 #endif

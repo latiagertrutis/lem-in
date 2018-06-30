@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 12:45:32 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/29 18:02:06 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/30 15:24:36 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void			ft_set_links(t_data *data, char *line, t_node *head)
 		i = format_line(line);
 		if (!ft_strcmp(line, line + i + 1))
 			ft_line_error(data->current_line,
-							"Some node is linked with himselve");
+				"Some node is linked with himselve");
 		ft_link(line, line + i + 1, head, data);
 		free(line);
 		if (get_next_line(data->fd, &line) <= 0)

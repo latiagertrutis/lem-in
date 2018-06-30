@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:50:53 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/28 23:29:21 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/30 15:23:33 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,27 @@ t_path		*ft_realoj(t_path *src, int len)
 		len--;
 	}
 	return (new);
+}
+
+void		ft_cut_and_reset(t_node *true_start, int pos,
+		t_node *node, int reset)
+{
+	if (reset)
+	{
+		while (node)
+		{
+			node->ihbt = 0;
+			node = node->next;
+		}
+	}
+	else
+	{
+		while (pos + 1 < true_start->n_links)
+		{
+			true_start->links[pos] = true_start->links[pos + 1];
+			pos++;
+		}
+		true_start->n_links--;
+		true_start->links[pos] = NULL;
+	}
 }
