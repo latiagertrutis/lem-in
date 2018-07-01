@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/17 05:43:50 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/30 02:35:04 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/30 23:08:12 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void		ft_putnbr_error(int i)
 
 void			ft_line_error(int n, char *err)
 {
+	ft_putstr("\033[H\033[J");
 	if (!err)
 		perror(err);
 	else

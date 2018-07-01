@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 14:02:47 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/28 23:22:53 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/30 22:49:12 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ void			ft_distribute_ants(t_data *data, t_map **conjs, int len)
 	int		i;
 
 	pos = choose_conj(conjs, len, data->n_ants);
-	ft_printf("\npos es: %d\n", pos);
 	mat = allocate_matrix(pos + 1);
 	matrix_gen(conjs[pos], pos + 1, mat);
 	i = 0;

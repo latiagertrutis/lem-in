@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 12:08:50 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/20 12:19:26 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/30 23:07:55 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	ft_check_number_of_ants(t_data *data, char **line)
 	{
 		if (get_next_line(data->fd, line) <= 0)
 			ft_line_error(data->current_line, "Nothing in the map dude");
+		ft_printf("%s\n", *line);
 		if (!check_comment_line(data, *line, NULL))
 			break ;
 		data->current_line++;

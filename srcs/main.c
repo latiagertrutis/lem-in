@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/08 20:32:11 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/30 14:56:25 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/06/30 23:06:04 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int		main(int argc, char **argv)
 	t_map	**paths;
 	int		min;
 
+	ft_putstr("\033[H\033[J");
 	data = (t_data){0, 0, 1, 0, NULL, NULL, (t_error){0, 0}};
 	if (argc >= 2 && (data.fd = open(argv[1], O_RDONLY)) < 0)
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 18:35:46 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/28 23:21:05 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/30 22:48:54 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ t_map			**ft_algorithm(t_data *data, t_node *node, int max)
 	cuant = 0;
 	while (i[0] < data->start->n_links && i[0] >= 0 && i[1] > 0)
 	{
-		ft_printf("tmp vale %i\n", tmp);
 		if (!(conj[max - i[1]] = ft_search_paths(data->start, &cuant, &tmp)))
 		{
 			i[0]--;
