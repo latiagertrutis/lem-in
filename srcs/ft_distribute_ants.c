@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 14:02:47 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/30 22:49:12 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/02 00:59:37 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ static int		choose_conj(t_map **conjs, int len, int n_ants)
 		j = -1;
 		while (++j < i)
 		{
-			if (conjs[i] && conjs[j] && (aux_h = ft_abs(n_ants -
-				ft_cuantity_of_ants(conjs[i], conjs[j], i + 1, j + 1))) < h)
+			if (conjs[i] && conjs[j] && (aux_h =
+			ft_abs(ft_cuantity_of_ants(conjs[i], conjs[j], i + 1, j + 1))) < h)
 			{
 				if (!(h = aux_h))
 					return (i);
