@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 21:05:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/30 20:29:32 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/03 20:59:01 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,6 @@ void				resize_links(t_node *n);
 int					check_link_format(char *line);
 void				ft_cut_and_reset(t_node *true_start, int pos, t_node *node,
 										int reset);
+void	ft_map_lector(t_map *map);
 
 #endif

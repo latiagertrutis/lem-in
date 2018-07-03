@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 00:04:52 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/29 00:05:14 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/03 19:13:32 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void		resize_links(t_node *n)
 	int		i;
 
 	i = 0;
-	if (!(aux = (t_node **)malloc(sizeof(t_node *) * (n->n_links / LINK_BUFF))))
+	if (!(aux = (t_node **)malloc(sizeof(t_node *) * (n->n_links + LINK_BUFF))))
 		ft_error(NULL);
 	while (i < n->n_links)
 	{

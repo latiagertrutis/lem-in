@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 12:08:50 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/02 16:26:58 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/03 19:00:49 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,5 @@ void	ft_check_number_of_ants(t_data *data, char **line)
 	}
 	if (ft_strlen(*line) > 10 || (data->n_ants = ft_atoi(*line)) <= 0)
 		ft_line_error(data->current_line, "Wrong number of ants");
+	free(*line);
 }

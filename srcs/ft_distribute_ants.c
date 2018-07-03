@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 14:02:47 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/02 00:59:37 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/03 18:57:15 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,10 @@ void			ft_distribute_ants(t_data *data, t_map **conjs, int len)
 	if (!ft_solve_system(mat, pos + 2, pos + 2))
 		ft_error("No solution found");
 	ft_solution(data, conjs[pos], mat, pos + 2);
+	i = 0;
+	while (i <= pos + 1)
+		free(mat[i++]);
+	free(mat);
 }
 /*
 ** for show the matrix

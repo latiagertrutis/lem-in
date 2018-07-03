@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 12:45:32 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/30 23:07:12 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/02 19:26:24 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void			ft_set_links(t_data *data, char *line, t_node *head)
 		data->current_line++;
 		if (check_comment_line(data, line, NULL))
 		{
+			free(line);
 			if (get_next_line(data->fd, &line) <= 0)
 				break ;
 			continue ;
