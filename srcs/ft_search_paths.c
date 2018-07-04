@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 11:23:37 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/04 21:20:21 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/04 22:07:30 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,6 @@ t_map			*ft_search_paths(t_node *start, int *end, int *max)
 	map = searcher_core(&bfs, *max, len, &tmp_end);
 	*end += tmp_end;
 	*max = 0;
-
+	free(bfs);
 	return (map);
 }

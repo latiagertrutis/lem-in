@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 12:08:50 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/03 19:00:49 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/04 22:18:17 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	ft_check_number_of_ants(t_data *data, char **line)
 		ft_printf("%s\n", *line);
 		if (!check_comment_line(data, *line, NULL))
 			break ;
+		free(*line);
 		data->current_line++;
 	}
 	i = 0;
