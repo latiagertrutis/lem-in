@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 11:23:37 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/03 22:07:26 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/04 21:18:56 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static t_map	*make_path(t_path *bfs, int end, int len)
 	return (head);
 }
 
-static t_map	*searcher_core(t_path *bfs, int max, int len, int *end)
+static t_map	*searcher_core(t_path **bfs, int max, int len, int *end)
 {
 	int	i[3];
 
@@ -50,20 +50,20 @@ static t_map	*searcher_core(t_path *bfs, int max, int len, int *end)
 		i[0]++;
 		i[1] = -1;
 		i[2] = 0;
-		if (max == bfs[i[0]].node->ihbt + 1)
-			while (i[2] < bfs[i[0]].node->n_links &&
-						!bfs[i[0]].node->links[i[2]]->end)
+		if (max == (*bfs)[i[0]].node->ihbt + 1)
+			while (i[2] < (*bfs)[i[0]].node->n_links &&
+						!(*bfs)[i[0]].node->links[i[2]]->end)
 				i[2]++;
-		while (++i[1] < bfs[i[0]].node->n_links && (i[2] ==
-				bfs[i[0]].node->n_links || !i[2]))
+		while (++i[1] < (*bfs)[i[0]].node->n_links && (i[2] ==
+				(*bfs)[i[0]].node->n_links || !i[2]))
 		{
-			if (!bfs[i[0]].node->links[i[1]]->ihbt)
-				*end += ft_add_node(&bfs, &len, i);
+			if (!(*bfs)[i[0]].node->links[i[1]]->ihbt)
+				*end += ft_add_node(bfs, &len, i);
 		}
 		if (i[0] + 1 > len)
 			return (NULL);
 	}
-	return (make_path(bfs, *end, len));
+	return (make_path((*bfs), *end, len));
 }
 
 t_map			*ft_search_paths(t_node *start, int *end, int *max)
@@ -80,7 +80,7 @@ t_map			*ft_search_paths(t_node *start, int *end, int *max)
 	bfs[0].node->ihbt = 1;
 	bfs[0].prev = NULL;
 	len = 0;
-	map = searcher_core(bfs, *max, len, &tmp_end);
+	map = searcher_core(&bfs, *max, len, &tmp_end);
 	*end += tmp_end;
 	*max = 0;
 	free(bfs);
