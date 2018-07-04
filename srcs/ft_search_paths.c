@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 11:23:37 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/04 21:18:56 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/04 21:20:21 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static t_map	*make_path(t_path *bfs, int end, int len)
 				conj->next->prev = conj;
 				conj = conj->next;
 			}
+			ft_printf("bfs se va a mover %i alante y %i a detras\n", len, i);
 			ft_prepare_next_node(&conj, &tmp, &end, bfs + len - i);
 		}
 	}
@@ -83,6 +84,6 @@ t_map			*ft_search_paths(t_node *start, int *end, int *max)
 	map = searcher_core(&bfs, *max, len, &tmp_end);
 	*end += tmp_end;
 	*max = 0;
-	free(bfs);
+
 	return (map);
 }
