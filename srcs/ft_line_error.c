@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/17 05:43:50 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/30 23:08:12 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/07 19:22:25 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,15 @@ void			ft_line_error(int n, char *err)
 		perror(err);
 	else
 	{
-		ft_putstr_fd("\e[38;5;196mError \e[38;5;37m[line ", 2);
-		ft_putnbr_error(n);
-		ft_putstr_fd("]\e[0m => \e[38;5;214m", 2);
+		if (n >= 0)
+		{
+			ft_putstr_fd("\e[38;5;196mError \e[38;5;37m[line ", 2);
+			ft_putnbr_error(n);
+			ft_putstr_fd("]", 2);
+		}
+		else
+			ft_putstr_fd("\e[38;5;196mError \e[38;5;37m", 2);
+		ft_putstr_fd("\e[0m => \e[38;5;214m", 2);
 		ft_putstr_fd(err, 2);
 		ft_putstr_fd("\e[0m\n", 2);
 	}

@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 11:23:37 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/30 15:23:23 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/07 19:21:29 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 static t_path	*ini_bfs(int *i, int *len, t_node *start)
 {
-	t_path *bfs;
+	t_path	*bfs;
+	int		size;
 
-	if (!(bfs = (t_path *)ft_memalloc(1000 * sizeof(t_path))))
+	size = ALGORITHM_BUFF;
+	if (!(bfs = (t_path *)ft_memalloc(ALGORITHM_BUFF * sizeof(t_path))))
 		ft_error("Error malloc ft_search_paths2\n");
 	bfs[0].node = start;
 	bfs[0].node->ihbt = 1;
@@ -105,7 +107,7 @@ static void		core(t_node *core, t_node *node)
 		i++;
 	}
 	if (!core->n_links)
-		ft_error("Start no unido con end\n");
+		ft_line_error(-1, "Start no unido con end\n");
 }
 
 void			ft_depure_graf(t_data *data, t_node *node)

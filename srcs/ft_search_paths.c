@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 11:23:37 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/04 22:07:30 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/07 19:10:25 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static t_map	*make_path(t_path *bfs, int end, int len)
 				conj->next->prev = conj;
 				conj = conj->next;
 			}
-			ft_printf("bfs se va a mover %i alante y %i a detras\n", len, i);
 			ft_prepare_next_node(&conj, &tmp, &end, bfs + len - i);
 		}
 	}
@@ -72,10 +71,12 @@ t_map			*ft_search_paths(t_node *start, int *end, int *max)
 	t_path	*bfs;
 	int		len;
 	t_map	*map;
+	int		size;
 	int		tmp_end;
 
+	size = ALGORITHM_BUFF;
 	tmp_end = 0;
-	if (!(bfs = (t_path *)ft_memalloc(1000 * sizeof(t_path))))
+	if (!(bfs = (t_path *)ft_memalloc(size * sizeof(t_path))))
 		ft_error("Error malloc ft_search_paths2\n");
 	bfs[0].node = start;
 	bfs[0].node->ihbt = 1;

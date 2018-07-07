@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 21:05:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/03 20:59:01 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/07 17:41:16 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "../libft/includes/libft.h"
 # define LINK_BUFF 50
 # define SET_BUFF 50
-#define	ALGORITHM_BUFF 1000
+# define ALGORITHM_BUFF 1000
 
 typedef struct		s_node
 {
