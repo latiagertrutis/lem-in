@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 12:23:36 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/03 18:52:35 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/08 22:00:13 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char		*ft_ini_node(t_data *data, t_node *node, char *line)
 	while (get_next_line(data->fd, &line) > 0 && !ft_strchr(line, '-'))
 	{
 		data->current_line++;
-		ft_printf("%s\n", line);
+		ft_print_map(data, line);
 		if (check_comment_line(data, line, node))
 		{
 			free(line);

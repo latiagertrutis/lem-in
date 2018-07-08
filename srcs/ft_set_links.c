@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 12:45:32 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/02 19:26:24 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/08 22:00:57 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void			ft_set_links(t_data *data, char *line, t_node *head)
 	{
 		if (!line)
 			ft_line_error(data->current_line, "No link found");
-		ft_printf("%s\n", line);
 		data->current_line++;
+		ft_print_map(data, line);
 		if (check_comment_line(data, line, NULL))
 		{
 			free(line);

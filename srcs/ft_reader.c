@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 21:04:22 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/02 19:24:56 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/08 22:37:44 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,5 @@ t_node			*ft_reader(t_data *data)
 	if (!data->start || !data->end)
 		ft_line_error(data->current_line, "No start or end found");
 	ft_set_links(data, line, head);
-	ft_putstr("\n");
 	return (head);
 }

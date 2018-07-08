@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/08 20:32:11 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/07 19:13:35 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/08 22:37:51 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,12 @@ int		main(int argc, char **argv)
 	t_map	**paths;
 	int		min;
 
-	ft_putstr("\033[H\033[J");
-	data = (t_data){0, 0, 1, 0, NULL, NULL, (t_error){0, 0}};
+	data = (t_data){0, NULL, 0, 0, 1, 0, NULL, NULL, (t_error){0, 0}};
 	if (argc >= 2 && (data.fd = open(argv[1], O_RDONLY)) < 0)
 		return (0);
 	node = ft_reader(&data);
+	write(1, data.file, data.file_len);
+	ft_putstr("\n");
 	ft_depure_graf(&data, node);
 	min = ft_min(data.end->n_links, data.start->n_links);
 	paths = ft_algorithm(&data, node, min);

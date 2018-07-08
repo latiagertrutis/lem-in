@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 21:05:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/07 17:41:16 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/08 22:32:56 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <fcntl.h>
 # include "../libft/includes/libft.h"
 # define LINK_BUFF 50
+# define PRINT_MAP_BUFF 1024
 # define SET_BUFF 50
 # define ALGORITHM_BUFF 1000
 
@@ -60,6 +61,8 @@ typedef struct		s_map
 typedef struct		s_data
 {
 	int				fd;
+	char			*file;
+	int				file_len;
 	int				n_ants;
 	int				current_line;
 	int				n_nodes;
@@ -105,6 +108,7 @@ void				resize_links(t_node *n);
 int					check_link_format(char *line);
 void				ft_cut_and_reset(t_node *true_start, int pos, t_node *node,
 										int reset);
-void	ft_map_lector(t_map *map);
+void				ft_map_lector(t_map *map);
+void				ft_print_map(t_data *data, char *line);
 
 #endif
