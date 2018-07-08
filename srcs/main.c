@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/08 20:32:11 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/09 00:35:19 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/09 00:39:29 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,12 @@ int		main(int argc, char **argv)
 	t_map	**paths;
 	int		min;
 
-	ft_putstr("\033[H\033[J");
-	data = (t_data){0, 0, 1, 0, NULL, NULL, (t_error){0, 0}};
+	data = (t_data){0, NULL, 0, 0, 1, 0, NULL, NULL, (t_error){0, 0}};
 	if (argc >= 2 && (data.fd = open(argv[1], O_RDONLY)) < 0)
 		return (0);
 	node = ft_reader(&data);
+	write(1, data.file, data.file_len);
+	ft_putstr("\n");
 	if (!(paths = check_insta_win(&data, &min)))
 	{
 		ft_depure_graf(&data, node);
@@ -103,5 +104,6 @@ int		main(int argc, char **argv)
 	}
 	ft_distribute_ants(&data, paths, min);
 	free_info(node, paths, min);
+	free(data.file);
 	return (0);
 }
