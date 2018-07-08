@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/08 20:32:11 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/08 22:42:23 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/09 01:44:47 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,14 @@ static void free_node(t_node *node)
 
 static void free_info(t_node *node, t_map **paths, int min)
 {
-	t_path *aux;
-	t_path *aux2;
-	t_map *m_aux;
+	t_path	*aux;
+	t_path	*aux2;
+	t_map	*m_aux;
+	int		i;
 
 	free_node(node);
-	for(int i = 0; i < min; i++)
+	i = -1;
+	while(++i < min)
 	{
 		while (paths[i])
 		{
