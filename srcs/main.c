@@ -6,13 +6,13 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/08 20:32:11 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/09 00:39:29 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/09 01:38:34 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
 
-static void free_node(t_node *node)
+static void			free_node(t_node *node)
 {
 	t_node *n_aux;
 
@@ -26,11 +26,11 @@ static void free_node(t_node *node)
 	}
 }
 
-static void free_info(t_node *node, t_map **paths, int min)
+static void			free_info(t_node *node, t_map **paths, int min)
 {
-	t_path *aux;
-	t_path *aux2;
-	t_map *m_aux;
+	t_path		*aux;
+	t_path		*aux2;
+	t_map		*m_aux;
 
 	free_node(node);
 	for(int i = 0; i < min; i++)
@@ -53,18 +53,19 @@ static void free_info(t_node *node, t_map **paths, int min)
 	free(paths);
 }
 
-static t_map	**check_insta_win(t_data *data, int *min)
+static t_map		**check_insta_win(t_data *data, int *min)
 {
-	int		i;
+	int		i[2];
 	t_map	**paths;
 
-	i = -1;
-	while (i < data->start->n_links && i != -2)
+	i[0] = 0;
+	i[1] = 0;
+	while (i[0] < data->start->n_links)
 	{
-		if (data->start->links[++i]->end)
-			i = -2;
+		if (data->start->links[i[0]++]->end)
+			i[1] = 1;
 	}
-	if (i > 0)
+	if (!i[1])
 		return (NULL);
 	if (!(paths = (t_map **)ft_memalloc(sizeof(t_map *))))
 		ft_error(NULL);
@@ -77,12 +78,11 @@ static t_map	**check_insta_win(t_data *data, int *min)
 		ft_error(NULL);
 	(*paths)->path->next->node = data->end;
 	(*paths)->path->next->prev = (*paths)->path;
-	(*paths)->tail = (*paths)->path->next;
 	*min = 1;
 	return (paths);
 }
 
-int		main(int argc, char **argv)
+int					main(int argc, char **argv)
 {
 	t_data	data;
 	t_node	*node;
@@ -93,15 +93,16 @@ int		main(int argc, char **argv)
 	if (argc >= 2 && (data.fd = open(argv[1], O_RDONLY)) < 0)
 		return (0);
 	node = ft_reader(&data);
-	write(1, data.file, data.file_len);
-	ft_putstr("\n");
 	if (!(paths = check_insta_win(&data, &min)))
 	{
 		ft_depure_graf(&data, node);
 		min = ft_min(data.end->n_links, data.start->n_links);
 		paths = ft_algorithm(&data, node, min);
-		ft_prepare_conjunts(paths, ft_min(data.start->n_links, data.end->n_links));
+		ft_prepare_conjunts(paths, ft_min(data.start->n_links,
+			data.end->n_links));
 	}
+	write(1, data.file, data.file_len);
+	ft_putstr("\n");
 	ft_distribute_ants(&data, paths, min);
 	free_info(node, paths, min);
 	free(data.file);
