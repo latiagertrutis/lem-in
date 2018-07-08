@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/07 19:38:04 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/08 22:35:33 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/08 22:57:04 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,17 @@
 
 static void		resize_file(t_data *data)
 {
-	char 	*aux;
+	char	*aux;
 	int		pos;
+	int		size;
 
-	pos = data->file_len;
-	if (!(aux = (char *)ft_memalloc(sizeof(char) * (PRINT_MAP_BUFF * (pos / PRINT_MAP_BUFF + 1)))))
+	size = PRINT_MAP_BUFF;
+	if (!(aux = (char *)ft_memalloc(sizeof(char) * (size * (data->file_len / size + 1)))))
 		ft_error(NULL);
-	while (pos - 1 >= 0)
+	pos = data->file_len - 1;
+	while (pos >= 0)
 	{
-		aux[pos - 1] = (data->file)[pos - 1];
+		aux[pos] = (data->file)[pos];
 		pos--;
 	}
 	free(data->file);
