@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/08 20:32:11 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/08 22:37:51 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/08 22:42:23 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,6 @@ int		main(int argc, char **argv)
 	ft_prepare_conjunts(paths, ft_min(data.start->n_links, data.end->n_links));
 	ft_distribute_ants(&data, paths, min);
 	free_info(node, paths, min);
+	free(data.file);
 	return (0);
 }
