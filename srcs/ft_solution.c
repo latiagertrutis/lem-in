@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 21:52:24 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/03 22:14:05 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/09 01:00:26 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,13 @@ void			ft_solution(t_data *data, t_map *conj, double **mat, int dim)
 	int ant;
 
 	ant = 0;
+	if (conj->path->next->node->end)
+	{
+		while (ant < data->n_ants)
+			assign_color(ant++, conj->path->next->node->name);
+		ft_putstr("\033[0m\n");
+		return ;
+	}
 	while (ant < data->n_ants)
 	{
 		move_ants(data, conj);
