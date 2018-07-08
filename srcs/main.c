@@ -6,40 +6,13 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/08 20:32:11 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/09 01:44:47 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/09 01:46:22 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
 
-static void	path_lector(t_path *path)
-{
-	while(path)
-	{
-		ft_printf("%s-", path->node->name);
-		path = path->next;
-	}
-}
-
-void	ft_map_lector(t_map *map)
-{
-	int		i;
-
-	i = 1;
-	if (map)
-	{
-		while (map)
-		{
-			path_lector(map->path);
-			i++;
-			map = map->next;
-			ft_putchar('\n');
-		}
-	}
-	return ;
-}
-
-static void free_node(t_node *node)
+static void			free_node(t_node *node)
 {
 	t_node *n_aux;
 
@@ -53,7 +26,7 @@ static void free_node(t_node *node)
 	}
 }
 
-static void free_info(t_node *node, t_map **paths, int min)
+static void			free_info(t_node *node, t_map **paths, int min)
 {
 	t_path	*aux;
 	t_path	*aux2;
@@ -62,7 +35,7 @@ static void free_info(t_node *node, t_map **paths, int min)
 
 	free_node(node);
 	i = -1;
-	while(++i < min)
+	while (++i < min)
 	{
 		while (paths[i])
 		{
@@ -82,7 +55,36 @@ static void free_info(t_node *node, t_map **paths, int min)
 	free(paths);
 }
 
-int		main(int argc, char **argv)
+static t_map		**check_insta_win(t_data *data, int *min)
+{
+	int		i[2];
+	t_map	**paths;
+
+	i[0] = 0;
+	i[1] = 0;
+	while (i[0] < data->start->n_links)
+	{
+		if (data->start->links[i[0]++]->end)
+			i[1] = 1;
+	}
+	if (!i[1])
+		return (NULL);
+	if (!(paths = (t_map **)ft_memalloc(sizeof(t_map *))))
+		ft_error(NULL);
+	if (!(*paths = (t_map *)ft_memalloc(sizeof(t_map))))
+		ft_error(NULL);
+	if (!((*paths)->path = (t_path *)ft_memalloc(sizeof(t_path))))
+		ft_error(NULL);
+	(*paths)->path->node = data->start;
+	if (!((*paths)->path->next = (t_path *)ft_memalloc(sizeof(t_path))))
+		ft_error(NULL);
+	(*paths)->path->next->node = data->end;
+	(*paths)->path->next->prev = (*paths)->path;
+	*min = 1;
+	return (paths);
+}
+
+int					main(int argc, char **argv)
 {
 	t_data	data;
 	t_node	*node;
@@ -93,12 +95,16 @@ int		main(int argc, char **argv)
 	if (argc >= 2 && (data.fd = open(argv[1], O_RDONLY)) < 0)
 		return (0);
 	node = ft_reader(&data);
+	if (!(paths = check_insta_win(&data, &min)))
+	{
+		ft_depure_graf(&data, node);
+		min = ft_min(data.end->n_links, data.start->n_links);
+		paths = ft_algorithm(&data, node, min);
+		ft_prepare_conjunts(paths, ft_min(data.start->n_links,
+			data.end->n_links));
+	}
 	write(1, data.file, data.file_len);
 	ft_putstr("\n");
-	ft_depure_graf(&data, node);
-	min = ft_min(data.end->n_links, data.start->n_links);
-	paths = ft_algorithm(&data, node, min);
-	ft_prepare_conjunts(paths, ft_min(data.start->n_links, data.end->n_links));
 	ft_distribute_ants(&data, paths, min);
 	free_info(node, paths, min);
 	free(data.file);
