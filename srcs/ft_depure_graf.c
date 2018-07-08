@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 11:23:37 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/07 19:21:29 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/07 19:52:39 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int		search_path(t_node *start, int len)
 		while (++i[1] < bfs[i[0]].node->n_links)
 		{
 			if (!bfs[i[0]].node->links[i[1]]->ihbt &&
-					!bfs[i[0]].node->links[i[1]]->start)
+			    !bfs[i[0]].node->links[i[1]]->start)
 			{
 				bfs = !((len + 1) % ALGORITHM_BUFF) ? ft_realoj(bfs, len) : bfs;
 				bfs[++len].node = bfs[i[0]].node->links[i[1]];
@@ -71,8 +71,8 @@ static void		check_double_links(t_node *node)
 			while (j < node->n_links)
 			{
 				if (node->links[i]->id == node->links[j++]->id && ((!node->start
-					|| !node->links[i]->end) && (!node->end ||
-						!node->links[i]->end)))
+				                                                    || !node->links[i]->end) && (!node->end ||
+					           !node->links[i]->end)))
 					ft_cut_and_reset(node, i, NULL, 0);
 			}
 			i++;

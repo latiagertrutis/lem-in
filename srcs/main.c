@@ -6,38 +6,11 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/08 20:32:11 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/07 19:13:35 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/09 00:35:19 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
-
-static void	path_lector(t_path *path)
-{
-	while(path)
-	{
-		ft_printf("%s-", path->node->name);
-		path = path->next;
-	}
-}
-
-void	ft_map_lector(t_map *map)
-{
-	int		i;
-
-	i = 1;
-	if (map)
-	{
-		while (map)
-		{
-			path_lector(map->path);
-			i++;
-			map = map->next;
-			ft_putchar('\n');
-		}
-	}
-	return ;
-}
 
 static void free_node(t_node *node)
 {
@@ -80,6 +53,35 @@ static void free_info(t_node *node, t_map **paths, int min)
 	free(paths);
 }
 
+static t_map	**check_insta_win(t_data *data, int *min)
+{
+	int		i;
+	t_map	**paths;
+
+	i = -1;
+	while (i < data->start->n_links && i != -2)
+	{
+		if (data->start->links[++i]->end)
+			i = -2;
+	}
+	if (i > 0)
+		return (NULL);
+	if (!(paths = (t_map **)ft_memalloc(sizeof(t_map *))))
+		ft_error(NULL);
+	if (!(*paths = (t_map *)ft_memalloc(sizeof(t_map))))
+		ft_error(NULL);
+	if (!((*paths)->path = (t_path *)ft_memalloc(sizeof(t_path))))
+		ft_error(NULL);
+	(*paths)->path->node = data->start;
+	if (!((*paths)->path->next = (t_path *)ft_memalloc(sizeof(t_path))))
+		ft_error(NULL);
+	(*paths)->path->next->node = data->end;
+	(*paths)->path->next->prev = (*paths)->path;
+	(*paths)->tail = (*paths)->path->next;
+	*min = 1;
+	return (paths);
+}
+
 int		main(int argc, char **argv)
 {
 	t_data	data;
@@ -92,10 +94,13 @@ int		main(int argc, char **argv)
 	if (argc >= 2 && (data.fd = open(argv[1], O_RDONLY)) < 0)
 		return (0);
 	node = ft_reader(&data);
-	ft_depure_graf(&data, node);
-	min = ft_min(data.end->n_links, data.start->n_links);
-	paths = ft_algorithm(&data, node, min);
-	ft_prepare_conjunts(paths, ft_min(data.start->n_links, data.end->n_links));
+	if (!(paths = check_insta_win(&data, &min)))
+	{
+		ft_depure_graf(&data, node);
+		min = ft_min(data.end->n_links, data.start->n_links);
+		paths = ft_algorithm(&data, node, min);
+		ft_prepare_conjunts(paths, ft_min(data.start->n_links, data.end->n_links));
+	}
 	ft_distribute_ants(&data, paths, min);
 	free_info(node, paths, min);
 	return (0);

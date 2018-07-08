@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 21:05:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/07 17:41:16 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/09 00:34:47 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ typedef struct		s_path
 typedef struct		s_map
 {
 	t_path			*path;
-	t_path			*head;
 	t_path			*tail;
 	int				len;
 	struct s_map	*next;
