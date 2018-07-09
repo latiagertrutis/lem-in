@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 21:52:24 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/09 01:34:00 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/09 03:40:01 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void		assign_color(int ant, char *name)
 	char	*aux;
 	int		len;
 
+	(void)name;
 	if (!(ant % 15))
 		aux = ft_itoa(15);
 	else

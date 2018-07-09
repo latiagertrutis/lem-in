@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 21:05:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/09 00:37:25 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/09 02:47:26 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define LINK_BUFF 50
 # define PRINT_MAP_BUFF 1024
 # define SET_BUFF 50
-# define ALGORITHM_BUFF 1000
+# define ALGORITHM_BUFF 2
 
 typedef struct		s_node
 {
