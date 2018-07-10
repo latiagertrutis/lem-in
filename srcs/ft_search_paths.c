@@ -6,13 +6,13 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 11:23:37 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/07 19:10:25 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/10 03:12:38 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
 
-static t_map	*make_path(t_path *bfs, int end, int len)
+t_map			*ft_make_path(t_path *bfs, int end, int len)
 {
 	t_map	*conj;
 	t_map	*head;
@@ -63,7 +63,7 @@ static t_map	*searcher_core(t_path **bfs, int max, int len, int *end)
 		if (i[0] + 1 > len)
 			return (NULL);
 	}
-	return (make_path((*bfs), *end, len));
+	return (ft_make_path((*bfs), *end, len));
 }
 
 t_map			*ft_search_paths(t_node *start, int *end, int *max)

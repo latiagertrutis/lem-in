@@ -6,7 +6,7 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/07/09 03:43:06 by jagarcia         ###   ########.fr        #
+#    Updated: 2018/07/10 03:57:57 by jagarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,9 @@ FUNCS =			main.c \
 				searcher_funcs.c \
 				resize_links.c \
 				check_link_format.c \
-				ft_print_map.c
+				ft_print_map.c \
+				free_info.c \
+				check_double_links.c
 
 OBJ_DIR = objects/
 LIBFT_DIR = libft/

@@ -6,54 +6,11 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/08 20:32:11 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/09 03:43:31 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/10 03:12:22 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
-
-static void			free_node(t_node *node)
-{
-	t_node *n_aux;
-
-	while (node)
-	{
-		n_aux = node;
-		node = node->next;
-		free(n_aux->name);
-		free(n_aux->links);
-		free(n_aux);
-	}
-}
-
-static void			free_info(t_node *node, t_map **paths, int min)
-{
-	t_path	*aux;
-	t_path	*aux2;
-	t_map	*m_aux;
-	int		i;
-
-	free_node(node);
-	i = -1;
-	while (++i < min)
-	{
-		while (paths[i])
-		{
-			aux = paths[i]->tail;
-			while (aux)
-			{
-				aux2 = aux;
-				aux = aux->prev;
-				free(aux2);
-			}
-			m_aux = paths[i];
-			paths[i] = paths[i]->next;
-			free(m_aux);
-		}
-		free(paths[i]);
-	}
-	free(paths);
-}
 
 static t_map		**check_insta_win(t_data *data, int *min)
 {
@@ -83,6 +40,54 @@ static t_map		**check_insta_win(t_data *data, int *min)
 	return (paths);
 }
 
+static void			check_arguments(t_data *data, int *argn, char ***argv)
+{
+	if (*argn > 3 || (*argn == 3 && ft_strcmp((*argv)[1], "-f")))
+	{
+		ft_putstr_fd("Usage: ./lem-in [option] < File Name or ./lem-in", 2);
+		ft_error(" [option] file_name |options: -f[only shortest path]");
+	}
+	else if (*argn == 3)
+	{
+		data->short_path = 1;
+		(*argv)++;
+	}
+	else if (*argn == 2)
+	{
+		if (!ft_strcmp((*argv)[1], "-f"))
+		{
+			data->short_path = 1;
+			(*argv)++;
+			(*argn)--;
+		}
+	}
+}
+
+static t_map		**main_core(int *min, t_data *data, t_node *node)
+{
+	t_map	**paths;
+	t_map	*map;
+
+	if (!(paths = check_insta_win(data, min)))
+	{
+		if (!(map = ft_depure_graf(data, node)))
+		{
+			*min = ft_min(data->end->n_links, data->start->n_links);
+			paths = ft_algorithm(data, node, *min);
+			ft_prepare_conjunts(paths, ft_min(data->start->n_links,
+				data->end->n_links));
+		}
+		else
+		{
+			if (!(paths = (t_map **)malloc(sizeof(t_map *))))
+				ft_error("Error malloc main\n");
+			*paths = map;
+			*min = 1;
+		}
+	}
+	return (paths);
+}
+
 int					main(int argc, char **argv)
 {
 	t_data	data;
@@ -92,18 +97,12 @@ int					main(int argc, char **argv)
 
 	min = 0;
 	paths = NULL;
-	data = (t_data){0, NULL, 0, 0, 1, 0, NULL, NULL, (t_error){0, 0}};
-	if (argc >= 2 && (data.fd = open(argv[1], O_RDONLY)) < 0)
-		return (0);
+	data = (t_data){0, NULL, 0, 0, 1, 0, NULL, NULL, (t_error){0, 0}, 0};
+	check_arguments(&data, &argc, &argv);
+	if (argc > 1 && (data.fd = open(argv[1], O_RDONLY)) < 0)
+		ft_error(NULL);
 	node = ft_reader(&data);
-	if (!(paths = check_insta_win(&data, &min)))
-	{
-		ft_depure_graf(&data, node);
-		min = ft_min(data.end->n_links, data.start->n_links);
-		paths = ft_algorithm(&data, node, min);
-		ft_prepare_conjunts(paths, ft_min(data.start->n_links,
-			data.end->n_links));
-	}
+	paths = main_core(&min, &data, node);
 	write(1, data.file, data.file_len);
 	ft_putstr("\n");
 	ft_distribute_ants(&data, paths, min);

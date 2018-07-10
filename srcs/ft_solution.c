@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 21:52:24 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/09 03:40:01 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/10 03:11:16 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,13 @@ static int		move_ants(t_data *data, t_map *conj)
 void			ft_solution(t_data *data, t_map *conj, double **mat, int dim)
 {
 	int ant;
+	int	i;
 
+	i = 1;
 	ant = 0;
 	if (conj->path->next->node->end)
 	{
+		ft_printf("\033[38;5;214mTurn %i: ", i++);
 		while (ant < data->n_ants)
 			assign_color(ant++, conj->path->next->node->name);
 		ft_putstr("\033[0m\n");
@@ -112,12 +115,14 @@ void			ft_solution(t_data *data, t_map *conj, double **mat, int dim)
 	}
 	while (ant < data->n_ants)
 	{
+		ft_printf("\033[38;5;214mTurn %i: ", i++);
 		move_ants(data, conj);
 		if (!send_ants(dim, conj, mat, &ant))
 			lagging_ants(data, &ant, conj);
 		ft_putstr("\n");
 	}
+	ft_printf("\033[38;5;214mTurn %i: ", i++);
 	while (move_ants(data, conj))
-		ft_putstr("\n");
+		ft_printf("\n\033[38;5;214mTurn %i: ", i++);
 	ft_putstr("\033[0m\n");
 }

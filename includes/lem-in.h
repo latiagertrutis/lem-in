@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 21:05:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/09 02:47:26 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/10 03:39:11 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,15 @@ typedef struct		s_data
 	t_node			*start;
 	t_node			*end;
 	t_error			errors;
+	int				short_path;
 }					t_data;
 
+void				check_double_links(t_node *node);
+void				free_info(t_node *node, t_map **paths, int min);
+t_map				*ft_make_path(t_path *bfs, int end, int len);
 t_node				*ft_reader(t_data *data);
 void				ft_line_error(int n, char *err);
-void				ft_depure_graf(t_data *data, t_node *node);
+t_map				*ft_depure_graf(t_data *data, t_node *node);
 t_map				*ft_search_paths(t_node *start, int *end, int *max);
 void				ft_check_number_of_ants(t_data *data, char **line);
 int					check_comment_line(t_data *data, char *line, t_node *node);
