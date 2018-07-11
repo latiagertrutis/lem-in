@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/08 20:32:11 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/11 04:01:49 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/11 04:17:36 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,19 +76,17 @@ static t_map		**main_core(int *min, t_data *data, t_node *node)
 			paths = ft_algorithm(data, node, *min);
 			ft_prepare_conjunts(paths, ft_min(data->start->n_links,
 				data->end->n_links));
+			return (paths);
 		}
-		else
-		{
-			if (!(paths = (t_map **)malloc(sizeof(t_map *))))
-				ft_error("Error malloc main\n");
-			*paths = map;
-			if (!((*paths)->path->prev = (t_path *)ft_memalloc(sizeof(t_path))))
-				ft_error("Error Malloc main_core\n");
-			(*paths)->path->prev->next = (*paths)->path;
-			(*paths)->path->prev->node = data->start;
-			(*paths)->path = (*paths)->path->prev;
-			*min = 1;
-		}
+		if (!(paths = (t_map **)malloc(sizeof(t_map *))))
+			ft_error("Error malloc main\n");
+		*paths = map;
+		if (!((*paths)->path->prev = (t_path *)ft_memalloc(sizeof(t_path))))
+			ft_error("Error Malloc main_core\n");
+		(*paths)->path->prev->next = (*paths)->path;
+		(*paths)->path->prev->node = data->start;
+		(*paths)->path = (*paths)->path->prev;
+		*min = 1;
 	}
 	return (paths);
 }
