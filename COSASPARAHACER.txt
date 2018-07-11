@@ -1,5 +1,0 @@
-en la funcion ft_algorithm.c
-reescribir las funciones de forma optima
--prepare_graf = pasa por todos los nodos del grafo encendiendo ihbt si algun camino pasa por el nodo
--check_compatible = comprueba que x paths son compatibles (no se tocan excepto en start y en end) [dejar para el final creo que estan mal las variables]
-- destroy_path = construye la torre eifel y se caga en el papa
