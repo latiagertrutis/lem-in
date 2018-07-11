@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/08 20:32:11 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/11 00:31:47 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/11 03:32:14 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,10 @@ static t_map		**main_core(int *min, t_data *data, t_node *node)
 			if (!(paths = (t_map **)malloc(sizeof(t_map *))))
 				ft_error("Error malloc main\n");
 			*paths = map;
+			(*paths)->path->prev = (t_path *)ft_memalloc(sizeof(t_path));
+			(*paths)->path->prev->next = (*paths)->path;
+			(*paths)->path->prev->node = data->start;
+			(*paths)->path = (*paths)->path->prev;
 			*min = 1;
 		}
 	}

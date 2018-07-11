@@ -6,7 +6,7 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/07/11 02:34:14 by jagarcia         ###   ########.fr        #
+#    Updated: 2018/07/11 02:46:07 by jagarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,7 @@ ifeq ($(MODE), 1)
 
 all : $(NAME)
 
-$(NAME) : | check_lib $(OBJ)
+$(NAME) : $(OBJ)
 	gcc $(OBJ) -L$(LIBFT_DIR) -l$(LIBFT_ABREV) -I$(INCLUDES_DIR) $(CFLAGS) -o $(NAME)
 
 $(OBJ_DIR)%.o : $(FUNCS_DIR)%.c $(HEADER_PATH) $(LIBFT_DIR)$(LIBFT_NAME)
@@ -72,7 +72,7 @@ $(OBJ_DIR)%.o : $(FUNCS_DIR)%.c $(HEADER_PATH) $(LIBFT_DIR)$(LIBFT_NAME)
 	@mv -f $(@F) $(OBJ_DIR)
 
 else
-$(NAME) : | check_lib $(OBJ)
+$(NAME) : | check_lib $(OBJ)  
 
 $(OBJ_DIR)%.o : $(FUNCS_DIR)%.c $(HEADER_PATH) $(LIBFT_DIR)$(LIBFT_NAME)
 	@printf "\033[92mCreating $(NAME)\033[0m\n"

@@ -6,11 +6,40 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 14:02:47 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/03 18:57:15 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/11 03:23:34 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
+
+/*
+**void	map_lector(t_map **conj, int len)
+**{
+**	t_path *aux;
+**	t_map *aux2;
+**
+**	if (conj)
+**	{
+**		for (int i=0; i < len; i++)
+**		{
+**			aux2 = conj[i];
+**			ft_printf("Conj %i\n", i);
+**			for(int j=0; j < i + 1; j++)
+**			{
+**				ft_printf("Path %i:", j);
+**				aux = aux2->path;
+**				while (aux)
+**				{
+**					ft_printf("%s -", aux->node->name);
+**					aux = aux->next;
+**				}
+**				ft_putchar('\n');
+**				aux2 = aux2->next;
+**			}
+**		}
+**	}
+**}
+*/
 
 static int		choose_conj(t_map **conjs, int len, int n_ants)
 {
