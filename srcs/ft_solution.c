@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 21:52:24 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/10 03:11:16 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/11 03:59:10 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ static void		assign_color(int ant, char *name)
 	else
 		aux = ft_itoa((ant % 15));
 	len = ft_strlen(aux);
-	str = ft_strjoin("{C:", aux);
+	if (!(str = ft_strjoin("{C:", aux)))
+		ft_error("Error strjoin1 assign_color\n");
 	free(aux);
 	aux = str;
-	str = ft_strjoin(aux, "}");
+	if (!(str = ft_strjoin(aux, "}")))
+		ft_error("Error strjoin2 assign_color\n");
 	free(aux);
 	ft_printf("%sL%d-%s ", str, ant, name);
 	free(str);

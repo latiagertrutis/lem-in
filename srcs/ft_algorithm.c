@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 18:35:46 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/30 22:48:54 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/11 03:57:45 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static t_map	**ini_algorithm(int i[2], t_map *tail_head[2],
 {
 	t_map	**conj;
 
-	conj = (t_map **)ft_memalloc(sizeof(t_map *) * (max + 1));
+	if (!(conj = (t_map **)ft_memalloc(sizeof(t_map *) * (max + 1))))
+		ft_error("Error malloc ini_algorithm\n");
 	*tmp = 0;
 	i[0] = 0;
 	i[1] = max;
