@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lemin.h"
 
 t_map			*ft_make_path(t_path *bfs, int end, int len)
 {

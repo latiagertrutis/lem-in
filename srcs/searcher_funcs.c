@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lemin.h"
 
 t_path		*ft_new_path(t_node *node, t_path *next, int *len)
 {

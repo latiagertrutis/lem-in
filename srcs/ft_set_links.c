@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lemin.h"
 
 static	t_node	*search_node(t_node *head, char *line, t_data *data)
 {

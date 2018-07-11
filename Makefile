@@ -49,7 +49,7 @@ GRAPHIC_DIR = srcs/graphics/
 
 LIBFT_NAME = libft.a
 LIBFT_ABREV = ft
-HEADERS = lem-in.h
+HEADERS = lemin.h
 
 HEADER_PATH = $(patsubst %.h, $(INCLUDES_DIR)%.h,$(HEADERS))
 OBJ = $(patsubst %.c, $(OBJ_DIR)%.o,$(FUNCS))
