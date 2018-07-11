@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lemin.h"
 
 int		ft_finish_conjunt(t_map *(tail_head[2]), t_map **conj,
 								t_node *node, int *cuant)

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lemin.h"
 
 static t_map	**ini_algorithm(int i[2], t_map *tail_head[2],
 									int *tmp, int max)
