@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 12:45:32 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/08 22:00:57 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/11 02:08:29 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,5 @@ void			ft_set_links(t_data *data, char *line, t_node *head)
 		if (get_next_line(data->fd, &line) <= 0)
 			break ;
 	}
+	free(line);
 }

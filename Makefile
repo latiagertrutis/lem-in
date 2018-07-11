@@ -6,7 +6,7 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/07/10 03:57:57 by jagarcia         ###   ########.fr        #
+#    Updated: 2018/07/11 02:34:14 by jagarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 NAME = lem-in
 
-CFLAGS =  -Wall -Wextra -Werror #-fsanitize=address
+CFLAGS =  -Wall -Wextra -Werror -g3 #-fsanitize=address
 
 FUNCS =			main.c \
 				ft_reader.c\
@@ -56,31 +56,31 @@ OBJ = $(patsubst %.c, $(OBJ_DIR)%.o,$(FUNCS))
 
 MODE = 0
 
-.PHONY: $(LIBFT_DIR)$(LIBFT_NAME)
+.PHONY: check_lib
 
 ifeq ($(MODE), 1)
 
-all : | $(LIBFT_DIR)$(LIBFT_NAME) $(NAME)
+all : $(NAME)
 
-$(NAME) : $(OBJ)
-	@gcc $(OBJ) -L$(LIBFT_DIR) -l$(LIBFT_ABREV) -I$(INCLUDES_DIR) $(CFLAGS) -o $(NAME)
+$(NAME) : | check_lib $(OBJ)
+	gcc $(OBJ) -L$(LIBFT_DIR) -l$(LIBFT_ABREV) -I$(INCLUDES_DIR) $(CFLAGS) -o $(NAME)
 
-$(OBJ_DIR)%.o : $(FUNCS_DIR)%.c $(HEADER_PATH)
+$(OBJ_DIR)%.o : $(FUNCS_DIR)%.c $(HEADER_PATH) $(LIBFT_DIR)$(LIBFT_NAME)
 	@printf "\033[92m--->Compiling $(@F)\n\033[0m"
 	@gcc $(CFLAGS) -c -I $(INCLUDES_DIR) $<
 	@mkdir -p $(OBJ_DIR)
 	@mv -f $(@F) $(OBJ_DIR)
 
 else
-$(NAME) : $(OBJ) $(LIBFT_DIR)$(LIBFT_NAME)
+$(NAME) : | check_lib $(OBJ)
 
-$(OBJ_DIR)%.o : $(FUNCS_DIR)%.c $(HEADER_PATH)
+$(OBJ_DIR)%.o : $(FUNCS_DIR)%.c $(HEADER_PATH) $(LIBFT_DIR)$(LIBFT_NAME)
 	@printf "\033[92mCreating $(NAME)\033[0m\n"
 	@$(MAKE) MODE=1
 	@printf "\033[92mDone $(NAME)[\xE2\x9C\x94]\n\033[0m"
 endif
 
-$(LIBFT_DIR)$(LIBFT_NAME):
+check_lib:
 	@$(MAKE) -sC $(LIBFT_DIR)
 
 clean:
