@@ -6,7 +6,7 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/07/11 02:46:07 by jagarcia         ###   ########.fr        #
+#    Updated: 2018/09/04 17:50:14 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 NAME = lem-in
 
-CFLAGS =  -Wall -Wextra -Werror -g3 #-fsanitize=address
+CFLAGS =  #-Wall -Wextra -Werror -g3 #-fsanitize=address
 
 FUNCS =			main.c \
 				ft_reader.c\
