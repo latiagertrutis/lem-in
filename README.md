@@ -13,3 +13,4 @@ Make
 
 ## Screenshot
 
+![alt text](https://github.com/latiagertrutis/lem-in/blob/master/images/Screenshot%20from%202018-09-04%2018-01-05.png)
