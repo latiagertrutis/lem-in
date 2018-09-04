@@ -5,10 +5,7 @@ Search optimal path to send all the ants from start to finish, in a graph where 
 ## Usage
 
 ```
-Make
-```
-```
-./lem-in file.map
+make && ./lem-in file.map
 ```
 
 ## Screenshot
